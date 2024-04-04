@@ -1,0 +1,46 @@
+import { ApiProperty } from '@nestjs/swagger';
+import {
+  IsString,
+  Length,
+  IsNumber,
+  IsNotEmpty,
+  IsDate,
+  IsEnum,
+  ValidateNested,
+} from 'class-validator';
+import { UserAdressDto } from 'src/users/dto/user.adress.dto';
+import { OrderStatus } from '../order.model';
+import { Type } from 'class-transformer';
+
+export class OrderCreateDto {
+  @ApiProperty({ example: '1', description: 'unique identifier' })
+  @IsNumber()
+  orderId: number;
+
+  @ApiProperty({ example: '1', description: `unique identifier` })
+  @IsString()
+  @IsNotEmpty()
+  @Length(2, 100, {
+    message: `book's title must be min 2 and max 100 characters`,
+  })
+  bookId: number;
+
+  @ApiProperty({ type: UserAdressDto })
+  @ValidateNested()
+  @Type(() => UserAdressDto)
+  adress: UserAdressDto;
+
+  @ApiProperty({ example: '20-10-2024', description: `delivery date` })
+  @IsDate()
+  @IsNotEmpty()
+  deliveryDate: Date;
+
+  @ApiProperty({
+    example: 'in process',
+    enum: OrderStatus,
+    description: `Order status`,
+  })
+  @IsNotEmpty()
+  @IsEnum(OrderStatus)
+  status: OrderStatus;
+}

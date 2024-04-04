@@ -14,11 +14,11 @@ interface Adress {
   country: string;
   city: string;
   street: string;
-  building?: number;
+  building: number;
   apartament?: number;
 }
 
-enum OrderStatus {
+export enum OrderStatus {
   InProcess = 'in process',
   Delivered = 'delivered',
 }
@@ -39,6 +39,7 @@ export class Order extends Model<Order, Adress> {
     type: DataType.NUMBER,
     unique: true,
     allowNull: false,
+    field: 'book_id',
   })
   bookId: number;
 
@@ -50,7 +51,7 @@ export class Order extends Model<Order, Adress> {
   })
   deliveryAdress: Adress;
 
-  @ApiProperty({ example: `10.01.2024`, description: `delivery date` })
+  @ApiProperty({ example: `10-01-2024`, description: `delivery date` })
   @Column({
     type: DataType.DATE,
     unique: true,

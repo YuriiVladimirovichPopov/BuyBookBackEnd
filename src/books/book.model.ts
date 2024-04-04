@@ -44,7 +44,7 @@ export class Book extends Model<Book, BookCreationAttr> {
   })
   description: string;
 
-  @ApiProperty({ example: '01.01.2024', description: `book's publishedDate` })
+  @ApiProperty({ example: '01-01-2024', description: `book's publishedDate` })
   @Column({
     type: DataType.DATE,
     allowNull: false,
@@ -60,7 +60,7 @@ export class Book extends Model<Book, BookCreationAttr> {
   })
   ISBN: string;
 
-  @ApiProperty({ example: '333 dollars', description: `book's price` })
+  @ApiProperty({ example: '333 bucks', description: `book's price` })
   @Column({
     type: DataType.STRING,
     allowNull: false,

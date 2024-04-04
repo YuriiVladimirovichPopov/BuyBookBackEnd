@@ -44,11 +44,11 @@ export class User extends Model<User, UserCreationAttr> {
 
   @ApiProperty({ example: `89998887766`, description: `user's phone number` })
   @Column({
-    type: DataType.NUMBER,
+    type: DataType.STRING,
     unique: true,
     defaultValue: false,
   })
-  phoneNumber: number;
+  phoneNumber: string;
 
   @ApiProperty({ example: 'true', description: 'ban or unban' })
   @Column({
