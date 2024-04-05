@@ -14,6 +14,7 @@ import { OrdersService } from './orders/orders.service';
 import { AuthorsService } from './authors/authors.service';
 import { usersProviders } from './users/user.providers';
 import { booksProviders } from './books/book.providers';
+import { authorsProviders } from './authors/author.providers';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { booksProviders } from './books/book.providers';
     //providers
     ...usersProviders,
     ...booksProviders,
+    ...authorsProviders,
   ],
 })
 export class AppModule {}
