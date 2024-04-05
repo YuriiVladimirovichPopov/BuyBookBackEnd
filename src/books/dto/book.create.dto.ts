@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, Length, IsNumber, IsNotEmpty } from 'class-validator';
 
-export class AuthorCreateDto {
+export class BookCreateDto {
   @ApiProperty({ example: '1', description: 'unique identifier' })
   @IsNumber()
   bookId: number;

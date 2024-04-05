@@ -8,7 +8,7 @@ import {
   IsEnum,
   ValidateNested,
 } from 'class-validator';
-import { UserAdressDto } from 'src/users/dto/user.adress.dto';
+import { UserAddressDto } from 'src/users/dto/user.adress.dto';
 import { OrderStatus } from '../order.model';
 import { Type } from 'class-transformer';
 
@@ -25,10 +25,10 @@ export class OrderCreateDto {
   })
   bookId: number;
 
-  @ApiProperty({ type: UserAdressDto })
+  @ApiProperty({ type: UserAddressDto })
   @ValidateNested()
-  @Type(() => UserAdressDto)
-  adress: UserAdressDto;
+  @Type(() => UserAddressDto)
+  address: UserAddressDto;
 
   @ApiProperty({ example: '20-10-2024', description: `delivery date` })
   @IsDate()

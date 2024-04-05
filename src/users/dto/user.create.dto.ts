@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString, Length, ValidateNested } from 'class-validator';
-import { UserAdressDto } from './user.adress.dto';
+import { UserAddressDto } from './user.adress.dto';
 import { Type } from 'class-transformer';
 
 export class UserCreateDto {
@@ -12,12 +12,12 @@ export class UserCreateDto {
   })
   login: string;
 
-  @ApiProperty({ type: UserAdressDto })
+  @ApiProperty({ type: UserAddressDto })
   @ValidateNested()
-  @Type(() => UserAdressDto)
-  adress: UserAdressDto;
+  @Type(() => UserAddressDto)
+  address: UserAddressDto;
 
-  @ApiProperty({ example: '1', description: 'unique identifier' })
+  @ApiProperty({ example: '89998887766', description: `user's phone's number` })
   @IsNotEmpty()
   phoneNumber: string;
 }

@@ -3,6 +3,7 @@ import { Author } from 'src/authors/author.model';
 import { AuthorBooks } from 'src/books/autor.books.model';
 import { Book } from 'src/books/book.model';
 import { Order } from 'src/orders/order.model';
+import { UserAddress } from 'src/users/user.address.model';
 import { User } from 'src/users/user.model';
 
 export const databaseProviders = [
@@ -17,7 +18,14 @@ export const databaseProviders = [
         password: process.env.POSTGRES_PASSWORD || '1234',
         database: process.env.POSTGRES_DB,
       });
-      sequelize.addModels([User, Book, Author, Order, AuthorBooks]);
+      sequelize.addModels([
+        User,
+        Book,
+        Author,
+        Order,
+        AuthorBooks,
+        UserAddress,
+      ]);
       await sequelize.sync();
       return sequelize;
     },

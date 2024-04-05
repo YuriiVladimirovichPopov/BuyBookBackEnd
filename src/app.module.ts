@@ -12,6 +12,8 @@ import { UsersService } from './users/users.service';
 import { BooksService } from './books/books.service';
 import { OrdersService } from './orders/orders.service';
 import { AuthorsService } from './authors/authors.service';
+import { usersProviders } from './users/user.providers';
+import { booksProviders } from './books/book.providers';
 
 @Module({
   imports: [
@@ -27,6 +29,14 @@ import { AuthorsService } from './authors/authors.service';
     AuthorsController,
     OrdersController,
   ],
-  providers: [UsersService, BooksService, AuthorsService, OrdersService],
+  providers: [
+    UsersService,
+    BooksService,
+    AuthorsService,
+    OrdersService,
+    //providers
+    ...usersProviders,
+    ...booksProviders,
+  ],
 })
 export class AppModule {}

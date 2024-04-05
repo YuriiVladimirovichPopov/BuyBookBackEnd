@@ -1,6 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Table, Column, Model, DataType, HasMany } from 'sequelize-typescript';
+import {
+  Table,
+  Column,
+  Model,
+  DataType,
+  HasMany,
+  BelongsTo,
+  ForeignKey,
+} from 'sequelize-typescript';
 import { Order } from 'src/orders/order.model';
+import { UserAddress } from './user.address.model';
 
 interface UserCreationAttributes {
   login: string;
@@ -33,15 +42,6 @@ export class User extends Model<User, UserCreationAttributes> {
   })
   login: string;
 
-  @ApiProperty({
-    example: `Nebivalia, st.Pukov, b. 10, ap.22`,
-    description: `user's adress`,
-  })
-  @Column({
-    type: DataType.JSONB,
-  })
-  address: object;
-
   @ApiProperty({ example: `89998887766`, description: `user's phone number` })
   @Column({
     type: DataType.STRING,
@@ -62,6 +62,13 @@ export class User extends Model<User, UserCreationAttributes> {
   })
   banReason: string;
 
+  @BelongsTo(() => UserAddress)
+  address: UserAddress;
+
   @HasMany(() => Order)
   orders: Order[];
+
+  @ForeignKey(() => UserAddress)
+  @Column({ type: DataType.INTEGER })
+  addressId: number;
 }

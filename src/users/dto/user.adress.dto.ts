@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsNumber, IsString, Length } from 'class-validator';
 
-export class UserAdressDto {
+export class UserAddressDto {
   @ApiProperty({ example: 'Nebyvaliya', description: `the country's name` })
   @IsString()
   @IsNotEmpty()
@@ -31,7 +31,7 @@ export class UserAdressDto {
   @Length(1, 6, {
     message: `the building's number must be min 1 and max 82 characters`,
   })
-  building: string;
+  building: number;
 
   @ApiProperty({ example: '666', description: `the apartmen's number` })
   @IsNumber()
