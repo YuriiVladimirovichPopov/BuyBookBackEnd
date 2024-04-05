@@ -1,5 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsNumber, IsString, Length } from 'class-validator';
+import { BelongsTo } from 'sequelize-typescript';
+import { User } from '../user.model';
 
 export class UserAddressDto {
   @ApiProperty({ example: 'Nebyvaliya', description: `the country's name` })
@@ -38,5 +40,8 @@ export class UserAddressDto {
   @Length(1, 6, {
     message: `the apartmen's number must be min 1 and max 82 characters`,
   })
-  apartament?: number;
+  apartment?: number;
+
+  @BelongsTo(() => User)
+  user: User;
 }

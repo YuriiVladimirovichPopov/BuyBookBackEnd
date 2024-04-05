@@ -2,20 +2,33 @@ import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { User } from './user.model';
 import { UserCreateDto } from './dto/user.create.dto';
 import { BanUserDto } from './dto/ban.user.dto';
+import { UserAddress } from './user.address.model';
 
 @Injectable()
 export class UsersService {
   constructor(@Inject('USER_REPOSITORY') private userRepository: typeof User) {}
 
   async createUser(dto: UserCreateDto) {
-    const newUser = await this.userRepository.create(dto);
-    if (!newUser) {
+    const newUser = new User();
+    newUser.login = dto.login;
+    newUser.address = new UserAddress();
+    newUser.address.country = dto.address.country;
+    newUser.address.city = dto.address.city;
+    newUser.address.street = dto.address.street;
+    newUser.address.building = dto.address.building;
+    newUser.address.apartment = dto.address.apartment;
+    newUser.phoneNumber = dto.phoneNumber;
+
+    const savedUser = await newUser.save();
+
+    if (!savedUser) {
       throw new HttpException(
-        { message: 'user unathorized' },
+        { message: 'User unauthorized' },
         HttpStatus.UNAUTHORIZED,
       );
     }
-    return newUser;
+
+    return savedUser;
   }
 
   async getUsers() {

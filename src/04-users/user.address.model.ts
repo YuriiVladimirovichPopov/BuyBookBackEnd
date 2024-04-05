@@ -1,5 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import {
+  Column,
+  DataType,
+  Model,
+  Table,
+  BelongsTo,
+  ForeignKey,
+} from 'sequelize-typescript';
+import { User } from './user.model';
 
 @Table({ tableName: 'user_addresses' })
 export class UserAddress extends Model<UserAddress> {
@@ -46,4 +54,11 @@ export class UserAddress extends Model<UserAddress> {
     allowNull: true,
   })
   apartment?: number;
+
+  @BelongsTo(() => User)
+  user: User;
+
+  @ForeignKey(() => User)
+  @Column({ type: DataType.INTEGER })
+  userId: number;
 }

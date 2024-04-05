@@ -11,20 +11,8 @@ import {
 import { Order } from 'src/03-orders/order.model';
 import { UserAddress } from './user.address.model';
 
-interface UserCreationAttributes {
-  login: string;
-  address: {
-    country: string;
-    city: string;
-    street: string;
-    building: number;
-    apartment?: number;
-  };
-  phone: number;
-}
-
 @Table({ tableName: 'users' })
-export class User extends Model<User, UserCreationAttributes> {
+export class User extends Model<User> {
   @ApiProperty({ example: '1', description: 'unique identifier' })
   @Column({
     type: DataType.INTEGER,
@@ -62,13 +50,13 @@ export class User extends Model<User, UserCreationAttributes> {
   })
   banReason: string;
 
-  @BelongsTo(() => UserAddress)
-  address: UserAddress;
-
   @HasMany(() => Order)
   orders: Order[];
 
   @ForeignKey(() => UserAddress)
   @Column({ type: DataType.INTEGER })
   addressId: number;
+
+  @BelongsTo(() => UserAddress)
+  address: UserAddress;
 }
