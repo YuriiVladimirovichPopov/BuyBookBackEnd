@@ -22,10 +22,10 @@ export class AuthorsController {
   @UsePipes(ValidationPipe)
   @Post()
   async createAuthor(@Body() authorDto: AuthorCreateDto) {
-    const newUser = await this.authorService.createAuthor(authorDto);
-    return newUser;
+    const newAuthor = await this.authorService.createAuthor(authorDto);
+    return newAuthor;
   }
-
+  //TODO: добавить пагинацию
   @ApiOperation({ summary: 'Get all authors' })
   @ApiResponse({ status: 200, type: [Author] })
   @Get()
@@ -36,7 +36,7 @@ export class AuthorsController {
   @ApiOperation({ summary: 'Get author by Id' })
   @ApiResponse({ status: 200, type: [Author] })
   @Get()
-  getAuthorById(@Param() id: string) {
+  getAuthorById(@Param() id: number) {
     return this.authorService.getAuthorById(id);
   }
 }

@@ -38,5 +38,5 @@ export class UserAddressDto {
   @Length(1, 6, {
     message: `the apartmen's number must be min 1 and max 82 characters`,
   })
-  apartament?: string;
+  apartament?: number;
 }

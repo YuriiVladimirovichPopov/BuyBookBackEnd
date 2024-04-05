@@ -22,7 +22,7 @@ export class BooksService {
     return books;
   }
 
-  async getBookById(id: string) {
+  async getBookById(id: number) {
     const book = await this.bookRepository.findOne({
       where: { id },
       include: { all: true },
@@ -33,7 +33,7 @@ export class BooksService {
     return book;
   }
 
-  async deleteBookById(id: string) {
+  async deleteBookById(id: number) {
     const book = await this.bookRepository.findByPk(id);
     if (!book) {
       throw new HttpException(`Book ${id} not found`, HttpStatus.NOT_FOUND);

@@ -26,7 +26,7 @@ export class AuthorsService {
     return authors;
   }
 
-  async getAuthorById(id: string) {
+  async getAuthorById(id: number) {
     const author = await this.authorRepository.findOne({
       where: { id },
       include: { all: true },

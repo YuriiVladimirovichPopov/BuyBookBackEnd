@@ -23,7 +23,7 @@ export class UsersService {
     return users;
   }
 
-  async getUserById(id: string) {
+  async getUserById(id: number) {
     const user = await this.userRepository.findOne({
       where: { id },
       include: { all: true },
@@ -48,7 +48,7 @@ export class UsersService {
     return user;
   }
 
-  async deleteUserById(id: string) {
+  async deleteUserById(id: number) {
     const user = await this.userRepository.findByPk(id);
     if (!user) {
       throw new HttpException(`User ${id} not found`, HttpStatus.NOT_FOUND);

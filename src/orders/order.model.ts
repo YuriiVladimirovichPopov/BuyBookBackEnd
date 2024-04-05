@@ -11,7 +11,7 @@ import {
 import { Book } from 'src/books/book.model';
 import { User } from 'src/users/user.model';
 
-interface Adress {
+export interface Address {
   country: string;
   city: string;
   street: string;
@@ -25,7 +25,7 @@ export enum OrderStatus {
 }
 
 @Table({ tableName: 'orders' })
-export class Order extends Model<Order, Adress> {
+export class Order extends Model<Order, Address> {
   @ApiProperty({ example: '1', description: 'unique identifier' })
   @Column({
     type: DataType.INTEGER,
@@ -52,12 +52,11 @@ export class Order extends Model<Order, Adress> {
     type: DataType.JSONB,
     allowNull: false,
   })
-  deliveryAdress: Adress;
+  deliveryAddress: Address;
 
   @ApiProperty({ example: `10-01-2024`, description: `delivery date` })
   @Column({
     type: DataType.DATE,
-    //unique: true,
     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
   })
   deliveryDate: Date;

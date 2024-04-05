@@ -27,7 +27,7 @@ export class UsersController {
     const newUser = await this.userService.createUser(userDto);
     return newUser;
   }
-
+  //TODO: добавить пагинацию
   @ApiOperation({ summary: 'Get all users' })
   @ApiResponse({ status: 200, type: [User] })
   @Get()
@@ -38,7 +38,7 @@ export class UsersController {
   @ApiOperation({ summary: 'Get user by Id' })
   @ApiResponse({ status: 200, type: [User] })
   @Get()
-  getById(@Param() id: string) {
+  getById(@Param() id: number) {
     return this.userService.getUserById(id);
   }
 
@@ -52,7 +52,7 @@ export class UsersController {
   @ApiOperation({ summary: `Delete user by Id` })
   @ApiResponse({ status: 200 })
   @Delete()
-  deleteUser(@Param() id: string) {
+  deleteUser(@Param() id: number) {
     return this.userService.deleteUserById(id);
   }
 }

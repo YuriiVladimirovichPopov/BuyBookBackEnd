@@ -27,7 +27,7 @@ export class BooksController {
     const newUser = await this.bookService.createBook(bookDto);
     return newUser;
   }
-
+  //TODO: добавить пагинацию
   @ApiOperation({ summary: 'Get all books' })
   @ApiResponse({ status: 200, type: [Book] })
   @Get()
@@ -38,14 +38,14 @@ export class BooksController {
   @ApiOperation({ summary: 'Get book by Id' })
   @ApiResponse({ status: 200, type: [Book] })
   @Get()
-  getBookById(@Param() id: string) {
+  getBookById(@Param() id: number) {
     return this.bookService.getBookById(id);
   }
 
   @ApiOperation({ summary: `Delete book by Id` })
   @ApiResponse({ status: 200 })
   @Delete()
-  deleteUser(@Param() id: string) {
+  deleteUser(@Param() id: number) {
     return this.bookService.deleteBookById(id);
   }
 }
