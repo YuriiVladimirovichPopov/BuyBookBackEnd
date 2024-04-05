@@ -6,7 +6,7 @@ import {
   ForeignKey,
   BelongsToMany,
 } from 'sequelize-typescript';
-import { Author } from 'src/authors/author.model';
+import { Author } from 'src/01-authors/author.model';
 import { Book } from './book.model';
 import { ApiProperty } from '@nestjs/swagger';
 

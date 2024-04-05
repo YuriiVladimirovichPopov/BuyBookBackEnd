@@ -6,12 +6,12 @@ import {
   Param,
   Post,
   UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { User } from './user.model';
 import { BanUserDto } from './dto/ban.user.dto';
-import { ValidationPipe } from 'src/pipes/validation.pipe';
 import { UserCreateDto } from './dto/user.create.dto';
 
 @ApiTags('users')

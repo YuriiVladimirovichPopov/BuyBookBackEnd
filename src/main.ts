@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { ValidationPipe } from './pipes/validation.pipe';
+import { appSettings } from './app.settings';
 
 async function start() {
   const app = await NestFactory.create(AppModule);
@@ -16,8 +16,8 @@ async function start() {
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);
-  //TODO: change pipes
-  app.useGlobalPipes(new ValidationPipe());
+
+  appSettings(app);
   await app.listen(PORT, () => console.log(`listening on port = ${PORT}`));
 }
 start();

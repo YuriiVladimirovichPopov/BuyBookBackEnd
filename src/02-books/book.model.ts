@@ -8,7 +8,7 @@ import {
   BelongsToMany,
   HasMany,
 } from 'sequelize-typescript';
-import { Author } from 'src/authors/author.model';
+import { Author } from 'src/01-authors/author.model';
 import { AuthorBooks } from './autor.books.model';
 
 interface BookCreationAttr {

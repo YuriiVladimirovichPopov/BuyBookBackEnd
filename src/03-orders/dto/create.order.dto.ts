@@ -8,7 +8,7 @@ import {
   IsEnum,
   ValidateNested,
 } from 'class-validator';
-import { UserAddressDto } from 'src/users/dto/user.adress.dto';
+import { UserAddressDto } from 'src/04-users/dto/user.adress.dto';
 import { OrderStatus } from '../order.model';
 import { Type } from 'class-transformer';
 

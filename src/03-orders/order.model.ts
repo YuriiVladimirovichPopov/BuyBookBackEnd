@@ -8,8 +8,8 @@ import {
   BelongsTo,
   Sequelize,
 } from 'sequelize-typescript';
-import { Book } from 'src/books/book.model';
-import { User } from 'src/users/user.model';
+import { Book } from 'src/02-books/book.model';
+import { User } from 'src/04-users/user.model';
 
 export interface Address {
   country: string;

@@ -1,21 +1,21 @@
 import { Module } from '@nestjs/common';
-import { UsersModule } from './users/users.module';
-import { BooksModule } from './books/books.module';
-import { AuthorsModule } from './authors/authors.module';
-import { OrdersModule } from './orders/orders.module';
+import { UsersModule } from './04-users/users.module';
+import { BooksModule } from './02-books/books.module';
+import { AuthorsModule } from './01-authors/authors.module';
+import { OrdersModule } from './03-orders/orders.module';
 import { DataBaseModule } from './data-base/data-base.module';
-import { UsersController } from './users/users.controller';
-import { BooksController } from './books/books.controller';
-import { AuthorsController } from './authors/authors.controller';
-import { OrdersController } from './orders/orders.controller';
-import { UsersService } from './users/users.service';
-import { BooksService } from './books/books.service';
-import { OrdersService } from './orders/orders.service';
-import { AuthorsService } from './authors/authors.service';
-import { usersProviders } from './users/user.providers';
-import { booksProviders } from './books/book.providers';
-import { authorsProviders } from './authors/author.providers';
-import { ordersProviders } from './orders/order.providers';
+import { UsersController } from './04-users/users.controller';
+import { BooksController } from './02-books/books.controller';
+import { AuthorsController } from './01-authors/authors.controller';
+import { OrdersController } from './03-orders/orders.controller';
+import { UsersService } from './04-users/users.service';
+import { BooksService } from './02-books/books.service';
+import { OrdersService } from './03-orders/orders.service';
+import { AuthorsService } from './01-authors/authors.service';
+import { usersProviders } from './04-users/user.providers';
+import { booksProviders } from './02-books/book.providers';
+import { authorsProviders } from './01-authors/author.providers';
+import { ordersProviders } from './03-orders/order.providers';
 
 @Module({
   imports: [

@@ -7,8 +7,8 @@ import {
   BelongsToMany,
   ForeignKey,
 } from 'sequelize-typescript';
-import { AuthorBooks } from 'src/books/autor.books.model';
-import { Book } from 'src/books/book.model';
+import { AuthorBooks } from 'src/02-books/autor.books.model';
+import { Book } from 'src/02-books/book.model';
 
 interface AuthorCreationAttr {
   firstName: string;

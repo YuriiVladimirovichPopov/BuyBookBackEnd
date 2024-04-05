@@ -8,7 +8,7 @@ import {
   BelongsTo,
   ForeignKey,
 } from 'sequelize-typescript';
-import { Order } from 'src/orders/order.model';
+import { Order } from 'src/03-orders/order.model';
 import { UserAddress } from './user.address.model';
 
 interface UserCreationAttributes {
