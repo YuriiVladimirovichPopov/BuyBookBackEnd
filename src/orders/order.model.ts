@@ -6,6 +6,7 @@ import {
   DataType,
   ForeignKey,
   BelongsTo,
+  Sequelize,
 } from 'sequelize-typescript';
 import { Book } from 'src/books/book.model';
 import { User } from 'src/users/user.model';
@@ -43,8 +44,10 @@ export class Order extends Model<Order, Adress> {
   })
   bookId: number;
 
-  // eslint-disable-next-line prettier/prettier
-  @ApiProperty({ example: `Russian Federation, Lenin's street, building 20, apart. 100`, description: `user's adress` })
+  @ApiProperty({
+    example: `Russian Federation, Lenin's street, building 20, apart. 100`,
+    description: `user's adress`,
+  })
   @Column({
     type: DataType.JSONB,
     allowNull: false,
@@ -54,8 +57,8 @@ export class Order extends Model<Order, Adress> {
   @ApiProperty({ example: `10-01-2024`, description: `delivery date` })
   @Column({
     type: DataType.DATE,
-    unique: true,
-    defaultValue: false,
+    //unique: true,
+    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
   })
   deliveryDate: Date;
 
@@ -69,6 +72,10 @@ export class Order extends Model<Order, Adress> {
   @ForeignKey(() => Book)
   @Column({ type: DataType.INTEGER })
   book_id: number;
+
+  @ForeignKey(() => User)
+  @Column({ type: DataType.INTEGER })
+  user_id: number;
 
   @BelongsTo(() => User)
   userId: User;

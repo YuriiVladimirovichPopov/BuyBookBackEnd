@@ -71,6 +71,10 @@ export class Book extends Model<Book, BookCreationAttr> {
   @Column({ type: DataType.INTEGER })
   authorId: number;
 
+  @ForeignKey(() => AuthorBooks)
+  @Column({ type: DataType.INTEGER })
+  id: number;
+
   @BelongsToMany(() => Author, () => AuthorBooks)
   author: Author;
 

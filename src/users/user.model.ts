@@ -2,22 +2,20 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Table, Column, Model, DataType, HasMany } from 'sequelize-typescript';
 import { Order } from 'src/orders/order.model';
 
-interface Adress {
-  country: string;
-  city: string;
-  street: string;
-  building?: number;
-  apartament?: number;
-}
-
-interface UserCreationAttr {
+interface UserCreationAttributes {
   login: string;
-  adress: Adress;
+  address: {
+    country: string;
+    city: string;
+    street: string;
+    building: number;
+    apartment?: number;
+  };
   phone: number;
 }
 
 @Table({ tableName: 'users' })
-export class User extends Model<User, UserCreationAttr> {
+export class User extends Model<User, UserCreationAttributes> {
   @ApiProperty({ example: '1', description: 'unique identifier' })
   @Column({
     type: DataType.INTEGER,
@@ -35,18 +33,18 @@ export class User extends Model<User, UserCreationAttr> {
   })
   login: string;
 
-  @ApiProperty({ example: `Russian Federation`, description: `user's adress` })
+  @ApiProperty({
+    example: `Nebivalia, st.Pukov, b. 10, ap.22`,
+    description: `user's adress`,
+  })
   @Column({
     type: DataType.JSONB,
-    allowNull: false,
   })
-  adress: Adress;
+  address: object;
 
   @ApiProperty({ example: `89998887766`, description: `user's phone number` })
   @Column({
     type: DataType.STRING,
-    unique: true,
-    defaultValue: false,
   })
   phoneNumber: string;
 
