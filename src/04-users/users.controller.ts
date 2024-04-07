@@ -37,7 +37,7 @@ export class UsersController {
 
   @ApiOperation({ summary: 'Get user by Id' })
   @ApiResponse({ status: 200, type: [User] })
-  @Get()
+  @Get(':id')
   getById(@Param() id: number) {
     return this.userService.getUserById(id);
   }
@@ -51,8 +51,8 @@ export class UsersController {
 
   @ApiOperation({ summary: `Delete user by Id` })
   @ApiResponse({ status: 200 })
-  @Delete()
-  deleteUser(@Param() id: number) {
+  @Delete(':id')
+  deleteUser(@Param('id') id: number) {
     return this.userService.deleteUserById(id);
   }
 }

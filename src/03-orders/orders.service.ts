@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { Order } from './order.model';
+import { Address, Order } from './order.model';
 import { OrderCreateDto } from './dto/create.order.dto';
 
 @Injectable()
@@ -30,6 +30,25 @@ export class OrdersService {
     return Order;
   }
 
+  async findByUserId(userId: number): Promise<Order[]> {
+    const orders = await this.ordersRepository.findAll({ where: { userId } });
+    return orders;
+  }
+
+  async findByBookTitle(bookTitle: string): Promise<Order[]> {
+    const orders = await this.ordersRepository.findAll({
+      where: { bookTitle },
+    });
+    return orders;
+  }
+
+  async findByDeliveryAddress(address: Address): Promise<Order[]> {
+    const orders = await this.ordersRepository.findAll({
+      where: { deliveryAddress: address },
+    });
+    return orders;
+  }
+
   async updateOrder(id: number, updatedto: OrderCreateDto): Promise<Order> {
     const order = await this.ordersRepository.findOne({
       where: { id },
@@ -40,7 +59,6 @@ export class OrdersService {
     }
 
     order.bookTitle = updatedto.bookTitle;
-    order.deliveryAddress = updatedto.address;
     order.deliveryDate = updatedto.deliveryDate;
     order.status = updatedto.status;
 

@@ -10,7 +10,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { OrdersService } from './orders.service';
-import { Order } from './order.model';
+import { Address, Order } from './order.model';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { OrderCreateDto } from './dto/create.order.dto';
 
@@ -43,6 +43,27 @@ export class OrdersController {
   ) {
     const order = await this.orderService.updateOrder(orderId, updatedOrder);
     return order;
+  }
+
+  @ApiOperation({ summary: 'Get Order by user Id' })
+  @ApiResponse({ status: 200, type: [Order] })
+  @Get('/user/:userId')
+  async findByUserId(@Param('userId') userId: number): Promise<Order[]> {
+    return this.orderService.findByUserId(userId);
+  }
+
+  @ApiOperation({ summary: 'Get Order by book title' })
+  @ApiResponse({ status: 200, type: [Order] })
+  @Get('/book/:bookTitle')
+  async findByBookId(@Param('bookTitle') bookTitle: string): Promise<Order[]> {
+    return this.orderService.findByBookTitle(bookTitle);
+  }
+
+  @ApiOperation({ summary: `Get Order by user's address` })
+  @ApiResponse({ status: 200, type: [Order] })
+  @Get('/address')
+  async findByDeliveryAddress(@Body() address: Address): Promise<Order[]> {
+    return this.orderService.findByDeliveryAddress(address);
   }
 
   @ApiOperation({ summary: `Delete Order by Id` })

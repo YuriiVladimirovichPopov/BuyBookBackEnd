@@ -18,6 +18,7 @@ async function start() {
   SwaggerModule.setup('api/docs', app, document);
 
   appSettings(app);
+
   await app.listen(PORT, () => console.log(`listening on port = ${PORT}`));
 }
 start();
