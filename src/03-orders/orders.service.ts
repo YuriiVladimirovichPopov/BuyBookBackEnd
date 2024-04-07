@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { Address, Order } from './order.model';
+import { Order } from './order.model';
 import { OrderCreateDto } from './dto/create.order.dto';
 
 @Injectable()
@@ -8,12 +8,12 @@ export class OrdersService {
     @Inject('ORDER_REPOSITORY') private ordersRepository: typeof Order,
   ) {}
 
-  async createOrder(dto: OrderCreateDto) {
-    const newOrder = await this.ordersRepository.create(dto);
+  async createOrder(orderDto: OrderCreateDto) {
+    const newOrder = await this.ordersRepository.create(orderDto);
     if (!newOrder) {
       throw new HttpException(
-        { message: 'Order not found' },
-        HttpStatus.NOT_FOUND,
+        { message: 'что-то пошло не так' },
+        HttpStatus.BAD_REQUEST,
       );
     }
     return newOrder;
@@ -42,7 +42,7 @@ export class OrdersService {
     return orders;
   }
 
-  async findByDeliveryAddress(address: Address): Promise<Order[]> {
+  async findByDeliveryAddress(address: string): Promise<Order[]> {
     const orders = await this.ordersRepository.findAll({
       where: { deliveryAddress: address },
     });
@@ -59,6 +59,7 @@ export class OrdersService {
     }
 
     order.bookTitle = updatedto.bookTitle;
+    order.deliveryAddress = updatedto.deliveryAddress;
     order.deliveryDate = updatedto.deliveryDate;
     order.status = updatedto.status;
 

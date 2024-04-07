@@ -10,7 +10,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { OrdersService } from './orders.service';
-import { Address, Order } from './order.model';
+import { Order } from './order.model';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { OrderCreateDto } from './dto/create.order.dto';
 
@@ -62,7 +62,7 @@ export class OrdersController {
   @ApiOperation({ summary: `Get Order by user's address` })
   @ApiResponse({ status: 200, type: [Order] })
   @Get('/address')
-  async findByDeliveryAddress(@Body() address: Address): Promise<Order[]> {
+  async findByDeliveryAddress(@Body() address: string) {
     return this.orderService.findByDeliveryAddress(address);
   }
 

@@ -6,20 +6,11 @@ import {
   DataType,
   ForeignKey,
   BelongsTo,
-  Sequelize,
   BelongsToMany,
 } from 'sequelize-typescript';
 import { Book } from 'src/02-books/book.model';
 import { User } from 'src/04-users/user.model';
 import { OrderBooks } from './order.books.model';
-
-export interface Address {
-  country: string;
-  city: string;
-  street: string;
-  building: number;
-  apartament?: number;
-}
 
 export enum OrderStatus {
   InProcess = 'in process',
@@ -27,7 +18,7 @@ export enum OrderStatus {
 }
 
 @Table({ tableName: 'orders' })
-export class Order extends Model<Order, Address> {
+export class Order extends Model<Order> {
   @ApiProperty({ example: '1', description: 'unique identifier' })
   @Column({
     type: DataType.INTEGER,
@@ -37,7 +28,7 @@ export class Order extends Model<Order, Address> {
   })
   id: number;
 
-  @ApiProperty({ example: 'book', description: `book's title` })
+  @ApiProperty({ example: 'Pyskin', description: `book's title` })
   @Column({
     type: DataType.STRING,
     unique: true,
@@ -54,14 +45,14 @@ export class Order extends Model<Order, Address> {
     type: DataType.JSONB,
     allowNull: false,
   })
-  deliveryAddress: Address;
+  deliveryAddress: string;
 
   @ApiProperty({ example: `10-01-2024`, description: `delivery date` })
   @Column({
-    type: DataType.DATE,
-    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+    type: DataType.STRING,
+    allowNull: false,
   })
-  deliveryDate: Date;
+  deliveryDate: string;
 
   @ApiProperty({ example: `in process`, description: `order status` })
   @Column({
@@ -72,7 +63,7 @@ export class Order extends Model<Order, Address> {
 
   @ForeignKey(() => Book)
   @Column({ type: DataType.INTEGER })
-  book_id: number;
+  bookId: number;
 
   @ForeignKey(() => User)
   @Column({ type: DataType.INTEGER })

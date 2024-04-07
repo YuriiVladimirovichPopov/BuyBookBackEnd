@@ -4,7 +4,6 @@ import {
   Length,
   IsNumber,
   IsNotEmpty,
-  IsDate,
   IsEnum,
 } from 'class-validator';
 import { OrderStatus } from '../order.model';
@@ -14,7 +13,7 @@ export class OrderCreateDto {
   @IsNumber()
   orderId: number;
 
-  @ApiProperty({ example: '1', description: `unique identifier` })
+  @ApiProperty({ example: 'BLABLABLA', description: `book's title` })
   @IsString()
   @IsNotEmpty()
   @Length(2, 100, {
@@ -22,10 +21,18 @@ export class OrderCreateDto {
   })
   bookTitle: string;
 
-  @ApiProperty({ example: '20-10-2024', description: `delivery date` })
-  @IsDate()
+  @ApiProperty({ example: '1', description: `delivery address` })
+  @IsString()
   @IsNotEmpty()
-  deliveryDate: Date;
+  @Length(10, 2500, {
+    message: `delivery address must be min 10 and max 250 characters`,
+  })
+  deliveryAddress: string;
+
+  @ApiProperty({ example: '20-10-2024', description: `delivery date` })
+  @IsString()
+  @IsNotEmpty()
+  deliveryDate: string;
 
   @ApiProperty({
     example: 'in process',
@@ -35,4 +42,12 @@ export class OrderCreateDto {
   @IsNotEmpty()
   @IsEnum(OrderStatus)
   status: OrderStatus;
+
+  @ApiProperty({ example: '1', description: `book's identifier` })
+  @IsNumber()
+  bookId: number;
+
+  @ApiProperty({ example: '1', description: `user's identifier` })
+  @IsNumber()
+  userId: number;
 }

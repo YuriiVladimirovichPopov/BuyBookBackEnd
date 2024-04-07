@@ -17,8 +17,8 @@ export class UserCreateDto {
   @ApiProperty({ example: 'user address', description: `user's address` })
   @IsString()
   @IsNotEmpty()
-  @Length(1, 150, {
-    message: `the user's address must be min 1 and max 15 characters`,
+  @Length(10, 250, {
+    message: `the user's address must be min 10 and max 250 characters`,
   })
   address: string;
 }
