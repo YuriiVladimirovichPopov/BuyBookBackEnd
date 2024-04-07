@@ -20,7 +20,7 @@ export class User extends Model<User> {
     autoIncrement: true,
     primaryKey: true,
   })
-  userId: number;
+  id: number;
 
   @ApiProperty({ example: 'login', description: `user's login` })
   @Column({

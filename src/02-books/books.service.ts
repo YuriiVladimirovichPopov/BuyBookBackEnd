@@ -7,6 +7,7 @@ export class BooksService {
   constructor(@Inject('BOOK_REPOSITORY') private bookRepository: typeof Book) {}
 
   async createBook(dto: BookCreateDto) {
+    dto.publishedDate = new Date(dto.publishedDate);
     const newBook = await this.bookRepository.create(dto);
     if (!newBook) {
       throw new HttpException(
@@ -25,7 +26,7 @@ export class BooksService {
   async getBookById(id: number) {
     const book = await this.bookRepository.findOne({
       where: { id },
-      include: { all: true },
+      include: { all: true, nested: true },
     });
     if (!book) {
       throw new HttpException(`Book ${id} not found`, HttpStatus.NOT_FOUND);
@@ -33,12 +34,19 @@ export class BooksService {
     return book;
   }
 
-  async deleteBookById(id: number) {
+  async deleteBookById(id: number): Promise<boolean> {
     const book = await this.bookRepository.findByPk(id);
     if (!book) {
       throw new HttpException(`Book ${id} not found`, HttpStatus.NOT_FOUND);
     }
     await book.destroy();
-    return { message: `Book ${id} deleted successfully` };
+    const deletedBook = await this.bookRepository.findByPk(id);
+    if (deletedBook) {
+      throw new HttpException(
+        `Book ${id} could not be deleted`,
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+    return true;
   }
 }

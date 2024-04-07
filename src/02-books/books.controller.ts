@@ -24,28 +24,29 @@ export class BooksController {
   @UsePipes(ValidationPipe)
   @Post()
   async create(@Body() bookDto: BookCreateDto) {
-    const newUser = await this.bookService.createBook(bookDto);
-    return newUser;
+    const newBook = await this.bookService.createBook(bookDto);
+    return newBook;
   }
   //TODO: добавить пагинацию
   @ApiOperation({ summary: 'Get all books' })
   @ApiResponse({ status: 200, type: [Book] })
   @Get()
-  getAllBooks() {
-    return this.bookService.getAllBooks();
+  async getAllBooks() {
+    return await this.bookService.getAllBooks();
   }
 
   @ApiOperation({ summary: 'Get book by Id' })
   @ApiResponse({ status: 200, type: [Book] })
-  @Get()
-  getBookById(@Param() id: number) {
-    return this.bookService.getBookById(id);
+  @Get(':id')
+  async getBookById(@Param('id') id: number) {
+    return await this.bookService.getBookById(id);
   }
 
   @ApiOperation({ summary: `Delete book by Id` })
   @ApiResponse({ status: 200 })
-  @Delete()
-  deleteUser(@Param() id: number) {
-    return this.bookService.deleteBookById(id);
+  @Delete(':id')
+  async deleteUser(@Param('id') id: number) {
+    await this.bookService.deleteBookById(id);
+    return { message: `Book ${id} deleted successfully` };
   }
 }

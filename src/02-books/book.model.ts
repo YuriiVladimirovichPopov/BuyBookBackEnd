@@ -4,17 +4,18 @@ import {
   Column,
   Model,
   DataType,
-  ForeignKey,
   BelongsToMany,
-  HasMany,
 } from 'sequelize-typescript';
 import { Author } from 'src/01-authors/author.model';
-import { AuthorBooks } from './autor.books.model';
+import { AuthorBooks } from './books.author.model';
+import { Order } from 'src/03-orders/order.model';
+import { OrderBooks } from 'src/03-orders/order.books.model';
 
 interface BookCreationAttr {
   title: string;
   description: string;
   publishedDate: Date;
+  ISBN: string;
   price: string;
 }
 
@@ -27,7 +28,7 @@ export class Book extends Model<Book, BookCreationAttr> {
     autoIncrement: true,
     primaryKey: true,
   })
-  bookId: number;
+  id: number;
 
   @ApiProperty({ example: 'title', description: `book's title` })
   @Column({
@@ -49,10 +50,10 @@ export class Book extends Model<Book, BookCreationAttr> {
     type: DataType.DATE,
     allowNull: false,
   })
-  publishedDate: string;
+  publishedDate: Date;
 
   // eslint-disable-next-line prettier/prettier
-  @ApiProperty({ example: 'ISBN 978-5-93673-265-2 ', description: `book's ISBN` })
+  @ApiProperty({ example: 'ISBN 978-5-93673-265-2', description: `book's ISBN` })
   @Column({
     type: DataType.STRING,
     unique: true,
@@ -67,17 +68,9 @@ export class Book extends Model<Book, BookCreationAttr> {
   })
   price: string;
 
-  @ForeignKey(() => Author)
-  @Column({ type: DataType.INTEGER })
-  authorId: number;
-
-  @ForeignKey(() => AuthorBooks)
-  @Column({ type: DataType.INTEGER })
-  id: number;
-
   @BelongsToMany(() => Author, () => AuthorBooks)
-  author: Author;
-
-  @HasMany(() => Author)
   authors: Author[];
+
+  @BelongsToMany(() => Order, () => OrderBooks)
+  orders: Order[];
 }

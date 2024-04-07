@@ -1,10 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, Length, IsNumber, IsNotEmpty } from 'class-validator';
+import { IsString, Length, IsNotEmpty } from 'class-validator';
 
 export class AuthorCreateDto {
-  @ApiProperty({ example: '1', description: 'unique identifier' })
-  @IsNumber()
-  authorId: number;
+  // @ApiProperty({ example: '1', description: 'unique identifier' })
+  // @IsNumber()
+  // authorId: number;
 
   @ApiProperty({ example: 'Oleg', description: `author's first name` })
   @IsString()

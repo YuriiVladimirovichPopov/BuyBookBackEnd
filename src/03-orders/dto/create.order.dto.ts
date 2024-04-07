@@ -23,7 +23,7 @@ export class OrderCreateDto {
   @Length(2, 100, {
     message: `book's title must be min 2 and max 100 characters`,
   })
-  bookId: number;
+  bookTitle: string;
 
   @ApiProperty({ type: UserAddressDto })
   @ValidateNested()

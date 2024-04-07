@@ -19,36 +19,27 @@ export class OrdersService {
     return newOrder;
   }
 
-  async getOrderById(orderId: number) {
+  async getOrderById(id: number) {
     const Order = await this.ordersRepository.findOne({
-      where: { orderId },
+      where: { id },
       include: { all: true },
     });
     if (!Order) {
-      throw new HttpException(
-        `Order ${orderId} not found`,
-        HttpStatus.NOT_FOUND,
-      );
+      throw new HttpException(`Order ${id} not found`, HttpStatus.NOT_FOUND);
     }
     return Order;
   }
 
-  async updateOrder(
-    orderId: number,
-    updatedto: OrderCreateDto,
-  ): Promise<Order> {
+  async updateOrder(id: number, updatedto: OrderCreateDto): Promise<Order> {
     const order = await this.ordersRepository.findOne({
-      where: { orderId },
+      where: { id },
       include: { all: true },
     });
     if (!order) {
-      throw new HttpException(
-        `Order ${orderId} not found`,
-        HttpStatus.NOT_FOUND,
-      );
+      throw new HttpException(`Order ${id} not found`, HttpStatus.NOT_FOUND);
     }
 
-    order.bookId = updatedto.bookId;
+    order.bookTitle = updatedto.bookTitle;
     order.deliveryAddress = updatedto.address;
     order.deliveryDate = updatedto.deliveryDate;
     order.status = updatedto.status;
@@ -58,7 +49,7 @@ export class OrdersService {
       return order;
     } catch (error) {
       throw new HttpException(
-        `Failed to update order ${orderId}`,
+        `Failed to update order ${id}`,
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }

@@ -6,5 +6,6 @@ import { booksProviders } from './book.providers';
 @Module({
   controllers: [BooksController],
   providers: [BooksService, ...booksProviders],
+  exports: [BooksService],
 })
 export class BooksModule {}

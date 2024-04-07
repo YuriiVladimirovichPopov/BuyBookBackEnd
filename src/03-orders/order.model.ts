@@ -7,9 +7,11 @@ import {
   ForeignKey,
   BelongsTo,
   Sequelize,
+  BelongsToMany,
 } from 'sequelize-typescript';
 import { Book } from 'src/02-books/book.model';
 import { User } from 'src/04-users/user.model';
+import { OrderBooks } from './order.books.model';
 
 export interface Address {
   country: string;
@@ -33,16 +35,16 @@ export class Order extends Model<Order, Address> {
     autoIncrement: true,
     primaryKey: true,
   })
-  orderId: number;
+  id: number;
 
   @ApiProperty({ example: 'book', description: `book's title` })
   @Column({
-    type: DataType.NUMBER,
+    type: DataType.STRING,
     unique: true,
     allowNull: false,
-    field: 'book_id',
+    field: 'book title',
   })
-  bookId: number;
+  bookTitle: string;
 
   @ApiProperty({
     example: `Russian Federation, Lenin's street, building 20, apart. 100`,
@@ -74,8 +76,11 @@ export class Order extends Model<Order, Address> {
 
   @ForeignKey(() => User)
   @Column({ type: DataType.INTEGER })
-  user_id: number;
+  userId: number;
 
   @BelongsTo(() => User)
-  userId: User;
+  user: typeof User;
+
+  @BelongsToMany(() => Book, () => OrderBooks)
+  orders: Book[];
 }

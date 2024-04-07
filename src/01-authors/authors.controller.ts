@@ -35,8 +35,8 @@ export class AuthorsController {
 
   @ApiOperation({ summary: 'Get author by Id' })
   @ApiResponse({ status: 200, type: [Author] })
-  @Get()
-  getAuthorById(@Param() id: number) {
-    return this.authorService.getAuthorById(id);
+  @Get(':id')
+  async getAuthorById(@Param('id') id: number): Promise<Author> {
+    return await this.authorService.getAuthorById(id);
   }
 }

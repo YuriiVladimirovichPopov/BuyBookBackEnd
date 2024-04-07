@@ -5,10 +5,9 @@ import {
   Model,
   DataType,
   BelongsToMany,
-  ForeignKey,
 } from 'sequelize-typescript';
-import { AuthorBooks } from 'src/02-books/autor.books.model';
 import { Book } from 'src/02-books/book.model';
+import { AuthorBooks } from 'src/02-books/books.author.model';
 
 interface AuthorCreationAttr {
   firstName: string;
@@ -24,7 +23,7 @@ export class Author extends Model<Author, AuthorCreationAttr> {
     autoIncrement: true,
     primaryKey: true,
   })
-  authorId: number;
+  id: number;
 
   @ApiProperty({ example: 'Oleg', description: `author's first name` })
   @Column({
@@ -49,10 +48,6 @@ export class Author extends Model<Author, AuthorCreationAttr> {
   })
   bioraphy: string;
 
-  @ForeignKey(() => Book)
-  @Column({ type: DataType.INTEGER })
-  bookId: number;
-
-  @BelongsToMany(() => AuthorBooks, () => Book)
+  @BelongsToMany(() => Book, () => AuthorBooks)
   books: Book[];
 }

@@ -18,7 +18,7 @@ export class UserAddress extends Model<UserAddress> {
     autoIncrement: true,
     primaryKey: true,
   })
-  addressId: number;
+  id: number;
 
   @ApiProperty({ example: '1', description: `'user's country'` })
   @Column({
@@ -60,5 +60,5 @@ export class UserAddress extends Model<UserAddress> {
 
   @ForeignKey(() => User)
   @Column({ type: DataType.INTEGER })
-  userId: number;
+  user_id: number;
 }

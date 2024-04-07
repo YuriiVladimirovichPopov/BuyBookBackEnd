@@ -29,16 +29,16 @@ export class OrdersController {
 
   @ApiOperation({ summary: 'Get Order by Id' })
   @ApiResponse({ status: 200, type: [Order] })
-  @Get()
-  getOrderById(@Param('orderId') orderId: number) {
+  @Get(':id')
+  getOrderById(@Param('id') orderId: number) {
     return this.orderService.getOrderById(orderId);
   }
 
   @ApiOperation({ summary: 'Update Order by Id' })
   @ApiResponse({ status: 200, type: [Order] })
-  @Put()
+  @Put(':id')
   async UpdateOrder(
-    @Param('orderId') orderId: number,
+    @Param('id') orderId: number,
     @Body() updatedOrder: OrderCreateDto,
   ) {
     const order = await this.orderService.updateOrder(orderId, updatedOrder);
@@ -47,8 +47,8 @@ export class OrdersController {
 
   @ApiOperation({ summary: `Delete Order by Id` })
   @ApiResponse({ status: 200 })
-  @Delete()
-  deleteOrder(@Param() id: number) {
+  @Delete(':id')
+  deleteOrder(@Param('id') id: number) {
     return this.orderService.deleteOrderById(id);
   }
 }
