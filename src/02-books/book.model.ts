@@ -61,12 +61,12 @@ export class Book extends Model<Book, BookCreationAttr> {
   })
   ISBN: string;
 
-  @ApiProperty({ example: '333 bucks', description: `book's price` })
+  @ApiProperty({ example: '333.99', description: `book's price` })
   @Column({
-    type: DataType.STRING,
+    type: DataType.FLOAT,
     allowNull: false,
   })
-  price: string;
+  price: number;
 
   @BelongsToMany(() => Author, () => AuthorBooks)
   authors: Author[];

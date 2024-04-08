@@ -34,6 +34,43 @@ export class BooksService {
     return book;
   }
 
+  async searchBookByTitle(title: string): Promise<Book> {
+    const titleByBook = await this.bookRepository.findOne({
+      where: { title },
+      include: { all: true, nested: true },
+    });
+    if (!titleByBook) {
+      throw new HttpException(`Book ${title} not found`, HttpStatus.NOT_FOUND);
+    }
+    return titleByBook;
+  }
+
+  async searchBookByPrice(price: number) {
+    const priceBook = await this.bookRepository.findOne({
+      where: { price },
+      include: { all: true, nested: true },
+    });
+    if (!priceBook) {
+      throw new HttpException(
+        `Book with ${price} not found`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    return priceBook;
+  }
+
+  async updateBookPrice(id: number, price: number) {
+    const book = await this.bookRepository.findByPk(id);
+    if (!book) {
+      throw new Error(`Book with id ${id} not found`);
+    }
+
+    book.price = price;
+    await book.save();
+
+    return book;
+  }
+
   async deleteBookById(id: number): Promise<boolean> {
     const book = await this.bookRepository.findByPk(id);
     if (!book) {
@@ -41,7 +78,7 @@ export class BooksService {
     }
     await book.destroy();
     const deletedBook = await this.bookRepository.findByPk(id);
-    if (deletedBook) {
+    if (!deletedBook) {
       throw new HttpException(
         `Book ${id} could not be deleted`,
         HttpStatus.INTERNAL_SERVER_ERROR,

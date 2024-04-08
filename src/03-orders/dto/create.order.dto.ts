@@ -24,8 +24,8 @@ export class OrderCreateDto {
   @ApiProperty({ example: '1', description: `delivery address` })
   @IsString()
   @IsNotEmpty()
-  @Length(10, 2500, {
-    message: `delivery address must be min 10 and max 250 characters`,
+  @Length(10, 400, {
+    message: `delivery address must be min 10 and max 400 characters`,
   })
   deliveryAddress: string;
 

@@ -1,18 +1,20 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { Order } from './order.model';
 import { OrderCreateDto } from './dto/create.order.dto';
+import { UsersService } from 'src/04-users/users.service';
 
 @Injectable()
 export class OrdersService {
   constructor(
     @Inject('ORDER_REPOSITORY') private ordersRepository: typeof Order,
+    private usersService: UsersService,
   ) {}
 
   async createOrder(orderDto: OrderCreateDto) {
     const newOrder = await this.ordersRepository.create(orderDto);
     if (!newOrder) {
       throw new HttpException(
-        { message: 'что-то пошло не так' },
+        { message: 'something went wrong' },
         HttpStatus.BAD_REQUEST,
       );
     }
@@ -30,22 +32,42 @@ export class OrdersService {
     return Order;
   }
 
-  async findByUserId(userId: number): Promise<Order[]> {
+  async findOrderByUserId(userId: number): Promise<Order[]> {
+    const userExists = await this.usersService.getUserById(userId);
+    if (!userExists) {
+      throw new HttpException(
+        `User with id ${userId} not found`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
     const orders = await this.ordersRepository.findAll({ where: { userId } });
     return orders;
   }
 
-  async findByBookTitle(bookTitle: string): Promise<Order[]> {
-    const orders = await this.ordersRepository.findAll({
-      where: { bookTitle },
-    });
-    return orders;
+  async findOrdersByBookTitle(bookTitle: string): Promise<Order[]> {
+    try {
+      const orders = await this.ordersRepository.findAll({
+        where: { bookTitle },
+      });
+      return orders;
+    } catch (error) {
+      throw new HttpException(
+        `Orders with book title '${bookTitle}' not found`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
   }
 
-  async findByDeliveryAddress(address: string): Promise<Order[]> {
+  async findOrdersByDeliveryAddress(address: string): Promise<Order[]> {
     const orders = await this.ordersRepository.findAll({
       where: { deliveryAddress: address },
     });
+    if (!orders || orders.length === 0) {
+      throw new HttpException(
+        `Orders with delivery address ${address} not found`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
     return orders;
   }
 

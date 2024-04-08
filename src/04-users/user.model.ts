@@ -21,7 +21,7 @@ export class User extends Model<User> {
   })
   login: string;
 
-  @ApiProperty({ example: `89998887766`, description: `user's phone number` })
+  @ApiProperty({ example: `+79998887766`, description: `user's phone number` })
   @Column({
     type: DataType.STRING,
   })

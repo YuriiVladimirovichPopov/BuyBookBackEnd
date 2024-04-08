@@ -49,21 +49,21 @@ export class OrdersController {
   @ApiResponse({ status: 200, type: [Order] })
   @Get('/user/:userId')
   async findByUserId(@Param('userId') userId: number): Promise<Order[]> {
-    return this.orderService.findByUserId(userId);
+    return this.orderService.findOrderByUserId(userId);
   }
 
   @ApiOperation({ summary: 'Get Order by book title' })
   @ApiResponse({ status: 200, type: [Order] })
   @Get('/book/:bookTitle')
   async findByBookId(@Param('bookTitle') bookTitle: string): Promise<Order[]> {
-    return this.orderService.findByBookTitle(bookTitle);
+    return this.orderService.findOrdersByBookTitle(bookTitle);
   }
 
   @ApiOperation({ summary: `Get Order by user's address` })
   @ApiResponse({ status: 200, type: [Order] })
   @Get('/address')
   async findByDeliveryAddress(@Body() address: string) {
-    return this.orderService.findByDeliveryAddress(address);
+    return this.orderService.findOrdersByDeliveryAddress(address);
   }
 
   @ApiOperation({ summary: `Delete Order by Id` })

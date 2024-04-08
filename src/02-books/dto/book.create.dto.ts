@@ -1,5 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, Length, IsNotEmpty, IsNumber } from 'class-validator';
+import {
+  IsString,
+  Length,
+  IsNotEmpty,
+  IsNumber,
+  IsNumberString,
+} from 'class-validator';
 
 export class BookCreateDto {
   @ApiProperty({ example: 'War and Peace', description: `book's title` })
@@ -34,11 +40,8 @@ export class BookCreateDto {
   ISBN: string;
 
   @ApiProperty({ example: '333 bucks', description: `book's price` })
-  @IsString()
+  @IsNumberString()
   @IsNotEmpty()
-  @Length(2, 20, {
-    message: `price must be min 3 and max 200 characters`,
-  })
   price: string;
 
   @ApiProperty({ example: 'figa figova', description: `book's author` })
