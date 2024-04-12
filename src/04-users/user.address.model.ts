@@ -9,7 +9,7 @@ import {
 } from 'sequelize-typescript';
 import { User } from './user.model';
 
-@Table({ tableName: `user's address` })
+@Table({ tableName: `user_address` })
 export class UserAddress extends Model<UserAddress> {
   @ApiProperty({ example: '1', description: 'unique identifier' })
   @Column({
@@ -23,7 +23,6 @@ export class UserAddress extends Model<UserAddress> {
   @ApiProperty({ example: 'Nebuvalia', description: `country` })
   @Column({
     type: DataType.STRING,
-    unique: true,
     allowNull: false,
   })
   country: string;
@@ -44,18 +43,17 @@ export class UserAddress extends Model<UserAddress> {
 
   @ApiProperty({ example: '666', description: 'building' })
   @Column({
-    type: DataType.NUMBER,
+    type: DataType.INTEGER,
     allowNull: false,
-    defaultValue: false,
   })
-  building: boolean;
+  building: number;
 
   @ApiProperty({ example: '777', description: 'apartment' })
   @Column({
-    type: DataType.STRING,
+    type: DataType.INTEGER,
     allowNull: true,
   })
-  apartment: string;
+  apartment: number;
 
   @ForeignKey(() => User)
   @Column({
