@@ -16,6 +16,7 @@ import { usersProviders } from './04-users/user.providers';
 import { booksProviders } from './02-books/book.providers';
 import { authorsProviders } from './01-authors/author.providers';
 import { ordersProviders } from './03-orders/order.providers';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -24,6 +25,10 @@ import { ordersProviders } from './03-orders/order.providers';
     AuthorsModule,
     OrdersModule,
     DataBaseModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: `.${process.env.NODE_ENV}.env`,
+    }),
   ],
   controllers: [
     UsersController,

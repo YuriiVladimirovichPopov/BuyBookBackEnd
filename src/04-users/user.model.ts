@@ -1,6 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Table, Column, Model, DataType, HasMany } from 'sequelize-typescript';
+import {
+  Table,
+  Column,
+  Model,
+  DataType,
+  HasMany,
+  HasOne,
+} from 'sequelize-typescript';
 import { Order } from 'src/03-orders/order.model';
+import { UserAddress } from './user.address.model';
 
 @Table({ tableName: 'users' })
 export class User extends Model<User> {
@@ -27,12 +35,6 @@ export class User extends Model<User> {
   })
   phoneNumber: string;
 
-  @ApiProperty({ example: `address`, description: `user's address` })
-  @Column({
-    type: DataType.STRING,
-  })
-  address: string;
-
   @ApiProperty({ example: 'true', description: 'ban or unban' })
   @Column({
     type: DataType.BOOLEAN,
@@ -49,4 +51,7 @@ export class User extends Model<User> {
 
   @HasMany(() => Order)
   orders: Order[];
+
+  @HasOne(() => UserAddress)
+  userAddress: UserAddress;
 }

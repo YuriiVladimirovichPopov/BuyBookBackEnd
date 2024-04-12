@@ -70,6 +70,10 @@ export class OrdersService {
     }
     return orders;
   }
+  //Это для поиска одного заказа по адресу
+  // const order = await Order.findByPk(orderId, { include: User });
+  // const user = order.user;
+  // const address = user.userAddress;
 
   async updateOrder(id: number, updatedto: OrderCreateDto): Promise<Order> {
     const order = await this.ordersRepository.findOne({
