@@ -2,6 +2,7 @@ import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { User } from './user.model';
 import { UserCreateDto } from './dto/user.create.dto';
 import { BanUserDto } from './dto/ban.user.dto';
+import { createAddressByUserDto } from './dto/addressByUser.create.dto';
 
 @Injectable()
 export class UsersService {
@@ -34,6 +35,17 @@ export class UsersService {
       throw new HttpException(`User ${id} not found`, HttpStatus.NOT_FOUND);
     }
     return user;
+  }
+
+  async createAddressByUser(address: createAddressByUserDto) {
+    const newAddressByUser = await this.userRepository.create(address);
+    if (!newAddressByUser) {
+      throw new HttpException(
+        { message: `something went wrong, please try again` },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    return newAddressByUser;
   }
 
   async banUser(dto: BanUserDto) {

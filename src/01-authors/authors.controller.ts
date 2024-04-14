@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -29,8 +30,8 @@ export class AuthorsController {
   @ApiOperation({ summary: 'Get all authors' })
   @ApiResponse({ status: 200, type: [Author] })
   @Get()
-  getAllAuthors() {
-    return this.authorService.getAllAuthors();
+  async getAllAuthors() {
+    return await this.authorService.getAllAuthors();
   }
 
   @ApiOperation({ summary: 'Get author by Id' })
@@ -38,5 +39,19 @@ export class AuthorsController {
   @Get(':id')
   async getAuthorById(@Param('id') id: number): Promise<Author> {
     return await this.authorService.getAuthorById(id);
+  }
+
+  @ApiOperation({ summary: `Delete Author by Id` })
+  @ApiResponse({ status: 200 })
+  @Delete(':id')
+  async deleteAuthorById(@Param('id') id: number) {
+    return await this.authorService.deleteAuthorById(id);
+  }
+
+  @ApiOperation({ summary: `Delete all Authors` })
+  @ApiResponse({ status: 200 })
+  @Delete()
+  async deleteAllAuthors() {
+    return await this.authorService.deleteAllAuthors();
   }
 }

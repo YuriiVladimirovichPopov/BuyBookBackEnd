@@ -41,14 +41,14 @@ export class UserAddress extends Model<UserAddress> {
   })
   street: string;
 
-  @ApiProperty({ example: '666', description: 'building' })
+  @ApiProperty({ example: '666', description: `building's number` })
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
   building: number;
 
-  @ApiProperty({ example: '777', description: 'apartment' })
+  @ApiProperty({ example: '777', description: `apartment's number` })
   @Column({
     type: DataType.INTEGER,
     allowNull: true,
@@ -63,5 +63,5 @@ export class UserAddress extends Model<UserAddress> {
   userId: number;
 
   @BelongsTo(() => User)
-  user: User[];
+  user: User;
 }

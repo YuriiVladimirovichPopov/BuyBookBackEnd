@@ -1,6 +1,8 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { Book } from './book.model';
 import { BookCreateDto } from './dto/book.create.dto';
+import { Author } from 'src/01-authors/author.model';
+import { Order } from 'src/03-orders/order.model';
 
 @Injectable()
 export class BooksService {
@@ -35,28 +37,65 @@ export class BooksService {
   }
 
   async searchBookByTitle(title: string): Promise<Book> {
-    const titleByBook = await this.bookRepository.findOne({
+    const bookByTitle = await this.bookRepository.findOne({
       where: { title },
       include: { all: true, nested: true },
     });
-    if (!titleByBook) {
+    if (!bookByTitle) {
       throw new HttpException(`Book ${title} not found`, HttpStatus.NOT_FOUND);
     }
-    return titleByBook;
+    return bookByTitle;
   }
 
-  async searchBookByPrice(price: number) {
-    const priceBook = await this.bookRepository.findOne({
+  async searchBookByPrice(price: number): Promise<Book> {
+    const bookByPrice = await this.bookRepository.findOne({
       where: { price },
       include: { all: true, nested: true },
     });
-    if (!priceBook) {
+    if (!bookByPrice) {
       throw new HttpException(
         `Book with ${price} not found`,
         HttpStatus.NOT_FOUND,
       );
     }
-    return priceBook;
+    return bookByPrice;
+  }
+  //TODO: проверить!!!
+  async searchBooksByAuthor(authorId: number): Promise<Book[]> {
+    const booksByAuthor = await this.bookRepository.findAll({
+      include: [
+        {
+          model: Author,
+          where: { id: authorId },
+        },
+      ],
+    });
+    if (!booksByAuthor || booksByAuthor.length === 0) {
+      throw new HttpException(
+        `Book by author with ${authorId} not found`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    return booksByAuthor;
+  }
+
+  //TODO: проверить!!!
+  async searchBooksByOrder(orderId: number): Promise<Book[]> {
+    const booksByOrder = await this.bookRepository.findAll({
+      include: [
+        {
+          model: Order,
+          where: { id: orderId },
+        },
+      ],
+    });
+    if (!booksByOrder || booksByOrder.length === 0) {
+      throw new HttpException(
+        `Book by order with ${orderId} not found`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    return booksByOrder;
   }
 
   async updateBookPrice(id: number, price: number) {

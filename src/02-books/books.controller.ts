@@ -58,6 +58,20 @@ export class BooksController {
     return this.booksService.searchBookByPrice(price);
   }
 
+  @ApiOperation({ summary: 'Get book by author' })
+  @ApiResponse({ status: 200, type: [Book] })
+  @Get(':authorId')
+  async searchByAuthor(@Query('authorId') authorId: number): Promise<Book[]> {
+    return this.booksService.searchBooksByAuthor(authorId);
+  }
+
+  @ApiOperation({ summary: 'Get book by author' })
+  @ApiResponse({ status: 200, type: [Book] })
+  @Get(':orderId')
+  async searchByOrder(@Query('orderId') orderId: number): Promise<Book[]> {
+    return this.booksService.searchBooksByOrder(orderId);
+  }
+
   @ApiOperation({ summary: 'Update book by price' })
   @ApiResponse({ status: 204, type: [Book] })
   @Put('/:id/price')

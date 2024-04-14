@@ -17,12 +17,4 @@ export class UserCreateDto {
   @IsPhoneNumber('RU', { message: 'Invalid phone number' })
   @IsNotEmpty()
   phoneNumber: string;
-
-  @ApiProperty({ example: 'user address', description: `user's address` })
-  @IsString()
-  @IsNotEmpty()
-  @Length(10, 250, {
-    message: `the user's address must be min 10 and max 250 characters`,
-  })
-  address: string;
 }

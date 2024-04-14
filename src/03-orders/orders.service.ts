@@ -106,6 +106,6 @@ export class OrdersService {
       throw new HttpException(`Order ${id} not found`, HttpStatus.NOT_FOUND);
     }
     await order.destroy();
-    return { message: `Order ${id} deleted successfully` };
+    return { message: `Order with ${id} deleted successfully` };
   }
 }
