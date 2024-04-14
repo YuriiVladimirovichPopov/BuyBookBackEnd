@@ -5,6 +5,7 @@ import {
   Model,
   DataType,
   BelongsToMany,
+  ForeignKey,
 } from 'sequelize-typescript';
 import { Author } from 'src/01-authors/author.model';
 import { AuthorBooks } from './books.author.model';
@@ -67,6 +68,10 @@ export class Book extends Model<Book, BookCreationAttr> {
     allowNull: false,
   })
   price: number;
+
+  @ForeignKey(() => Author)
+  @Column({ type: DataType.INTEGER })
+  authorId: number;
 
   @BelongsToMany(() => Author, () => AuthorBooks)
   authors: Author[];

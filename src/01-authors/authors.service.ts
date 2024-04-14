@@ -46,15 +46,15 @@ export class AuthorsService {
     return { message: `Author with ${id} deleted successfully` };
   }
 
-  async deleteAllAuthors() {
-    try {
-      await this.authorRepository.destroy();
-      return { message: 'All authors deleted successfully' };
-    } catch (error) {
-      throw new HttpException(
-        { message: 'Failed to delete all authors', error },
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
-    }
-  }
+  // async deleteAllAuthors() {
+  //   try {
+  //     await this.authorRepository.destroy();
+  //     return { message: 'All authors deleted successfully' };
+  //   } catch (error) {
+  //     throw new HttpException(
+  //       { message: 'Failed to delete all authors', error },
+  //       HttpStatus.INTERNAL_SERVER_ERROR,
+  //     );
+  //   }
+  // }
 }

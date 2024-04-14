@@ -111,18 +111,18 @@ export class BooksService {
   }
 
   async deleteBookById(id: number): Promise<boolean> {
-    const book = await this.bookRepository.findByPk(id);
-    if (!book) {
-      throw new HttpException(`Book ${id} not found`, HttpStatus.NOT_FOUND);
-    }
-    await book.destroy();
-    const deletedBook = await this.bookRepository.findByPk(id);
-    if (!deletedBook) {
+    try {
+      const book = await this.bookRepository.findByPk(id);
+      if (!book) {
+        throw new HttpException(`Book ${id} not found`, HttpStatus.NOT_FOUND);
+      }
+      await book.destroy();
+      return true;
+    } catch (error) {
       throw new HttpException(
         `Book ${id} could not be deleted`,
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
-    return true;
   }
 }

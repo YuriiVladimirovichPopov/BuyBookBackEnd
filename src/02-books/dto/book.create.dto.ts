@@ -44,7 +44,7 @@ export class BookCreateDto {
   @IsNotEmpty()
   price: string;
 
-  @ApiProperty({ example: 'figa figova', description: `book's author` })
+  @ApiProperty({ example: '4', description: `book's author` })
   @IsNumber()
   @IsNotEmpty()
   authorId: number;

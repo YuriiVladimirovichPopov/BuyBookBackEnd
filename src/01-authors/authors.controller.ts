@@ -48,10 +48,10 @@ export class AuthorsController {
     return await this.authorService.deleteAuthorById(id);
   }
 
-  @ApiOperation({ summary: `Delete all Authors` })
-  @ApiResponse({ status: 200 })
-  @Delete()
-  async deleteAllAuthors() {
-    return await this.authorService.deleteAllAuthors();
-  }
+  // @ApiOperation({ summary: `Delete all Authors` })
+  // @ApiResponse({ status: 200 })
+  // @Delete('/all')
+  // async deleteAllAuthors() {
+  //   return await this.authorService.deleteAllAuthors();
+  // }
 }

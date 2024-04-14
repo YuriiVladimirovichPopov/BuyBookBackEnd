@@ -86,7 +86,7 @@ export class BooksController {
   @ApiResponse({ status: 204 })
   @Delete(':id')
   async deleteBook(@Param('id') id: number) {
-    await this.booksService.deleteBookById(id);
+    this.booksService.deleteBookById(id);
     return { message: `Book ${id} deleted successfully` };
   }
 }
