@@ -57,7 +57,7 @@ export class OrdersService {
       );
     }
   }
-
+  //TODO: переделать
   async findOrdersByDeliveryAddress(address: string): Promise<Order[]> {
     const orders = await this.ordersRepository.findAll({
       where: { deliveryAddress: address },

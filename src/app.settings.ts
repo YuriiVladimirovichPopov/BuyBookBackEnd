@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { useContainer } from 'class-validator';
 import { AppModule } from './app.module';
-import { HttpExceptionFilter } from './exception/exception.filter';
+import { ValidationExceptionFilter } from './exception/exception.filter';
 
 export const appSettings = (app: INestApplication) => {
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
@@ -14,7 +14,7 @@ export const appSettings = (app: INestApplication) => {
     new ValidationPipe({
       whitelist: true,
       transform: true,
-      stopAtFirstError: true,
+      stopAtFirstError: false,
       exceptionFactory(errors) {
         console.log('Validation errors:', errors);
         const errorsForResp = [];
@@ -45,5 +45,5 @@ export const appSettings = (app: INestApplication) => {
       },
     }),
   );
-  app.useGlobalFilters(new HttpExceptionFilter());
+  app.useGlobalFilters(new ValidationExceptionFilter());
 };

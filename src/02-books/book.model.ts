@@ -69,6 +69,10 @@ export class Book extends Model<Book, BookCreationAttr> {
   })
   price: number;
 
+  // @ForeignKey(() => Order)
+  // @Column({ type: DataType.INTEGER })
+  // orderId: number;
+
   @ForeignKey(() => Author)
   @Column({ type: DataType.INTEGER })
   authorId: number;

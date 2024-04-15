@@ -50,10 +50,10 @@ export class UserAddress extends Model<UserAddress> {
 
   @ApiProperty({ example: '777', description: `apartment's number` })
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.STRING,
     allowNull: true,
   })
-  apartment: number;
+  apartment: string;
 
   @ForeignKey(() => User)
   @Column({

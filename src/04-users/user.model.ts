@@ -31,9 +31,9 @@ export class User extends Model<User> {
 
   @ApiProperty({ example: `+79998887766`, description: `user's phone number` })
   @Column({
-    type: DataType.STRING,
+    type: DataType.INTEGER,
   })
-  phoneNumber: string;
+  phoneNumber: number;
 
   @ApiProperty({ example: 'true', description: 'ban or unban' })
   @Column({

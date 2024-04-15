@@ -11,10 +11,10 @@ export class BooksService {
   async createBook(dto: BookCreateDto) {
     dto.publishedDate = new Date(dto.publishedDate);
     const newBook = await this.bookRepository.create(dto);
-    if (!newBook) {
+    if (!newBook.id) {
       throw new HttpException(
-        { message: 'book not found' },
-        HttpStatus.NOT_FOUND,
+        { message: 'something went wrong, please try again' },
+        HttpStatus.BAD_REQUEST,
       );
     }
     return newBook;
@@ -111,18 +111,18 @@ export class BooksService {
   }
 
   async deleteBookById(id: number): Promise<boolean> {
-    try {
-      const book = await this.bookRepository.findByPk(id);
-      if (!book) {
-        throw new HttpException(`Book ${id} not found`, HttpStatus.NOT_FOUND);
-      }
-      await book.destroy();
-      return true;
-    } catch (error) {
+    const book = await this.bookRepository.findByPk(id);
+    if (!book) {
+      throw new HttpException(`Book ${id} not found`, HttpStatus.NOT_FOUND);
+    }
+    await book.destroy();
+    const deletedBook = await this.bookRepository.findByPk(id);
+    if (!deletedBook) {
       throw new HttpException(
         `Book ${id} could not be deleted`,
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
+    return true;
   }
 }

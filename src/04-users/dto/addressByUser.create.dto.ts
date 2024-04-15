@@ -27,20 +27,20 @@ export class createAddressByUserDto {
   street: string;
 
   @ApiProperty({ example: 'Vasilii', description: `user's building` })
-  @IsNumber()
+  @IsString()
   @IsNotEmpty()
   @Length(1, 10, {
     message: `the user's building must be min 1 and max 10 characters`,
   })
-  building: number;
+  building: string;
 
   @ApiProperty({ example: '777', description: `user's apartment` })
-  @IsNumber()
+  @IsString()
   @IsNotEmpty()
   @Length(1, 10, {
     message: `the user's apartment must be min 1 and max 10 characters`,
   })
-  apartment: number;
+  apartment: string;
 
   @ApiProperty({ example: '3', description: `user's Id` })
   @IsNumber()

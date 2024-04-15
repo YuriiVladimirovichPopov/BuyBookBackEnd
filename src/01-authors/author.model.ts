@@ -46,7 +46,7 @@ export class Author extends Model<Author, AuthorCreationAttr> {
     type: DataType.STRING,
     defaultValue: false,
   })
-  bioraphy: string;
+  biography: string;
 
   @BelongsToMany(() => Book, () => AuthorBooks)
   books: Book[];
