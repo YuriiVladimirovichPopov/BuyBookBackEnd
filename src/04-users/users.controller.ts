@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Query,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -13,6 +14,8 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { User } from './user.model';
 import { BanUserDto } from './dto/ban.user.dto';
 import { UserCreateDto } from './dto/user.create.dto';
+import { UserAddress } from '../05-user-adderss/user.address.model';
+import { PaginationDto } from 'src/pagination';
 
 @ApiTags('users')
 @Controller('users')
@@ -27,12 +30,12 @@ export class UsersController {
     const newUser = await this.userService.createUser(userDto);
     return newUser;
   }
-  //TODO: добавить пагинацию
+
   @ApiOperation({ summary: 'Get all users' })
   @ApiResponse({ status: 200, type: [User] })
   @Get()
-  getAllUsers() {
-    return this.userService.getUsers();
+  getAllUsers(@Query() paginationDto: PaginationDto) {
+    return this.userService.getUsers(paginationDto);
   }
 
   @ApiOperation({ summary: 'Get user by Id' })
@@ -40,6 +43,13 @@ export class UsersController {
   @Get(':id')
   getById(@Param() id: number) {
     return this.userService.getUserById(id);
+  }
+
+  @ApiOperation({ summary: 'Create user address' })
+  @ApiResponse({ status: 201, type: [UserAddress] })
+  @Post()
+  addUserAddress(@Body() addressDto: UserAddress) {
+    return this.userService.createAddressByUser(addressDto);
   }
 
   @ApiOperation({ summary: `Ban users` })

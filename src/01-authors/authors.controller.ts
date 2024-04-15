@@ -12,6 +12,7 @@ import { AuthorsService } from './authors.service';
 import { Author } from './author.model';
 import { AuthorCreateDto } from './dto/author.create.dto';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { PaginationDto } from 'src/pagination';
 
 @ApiTags('authors')
 @Controller('authors')
@@ -26,12 +27,12 @@ export class AuthorsController {
     const newAuthor = await this.authorService.createAuthor(authorDto);
     return newAuthor;
   }
-  //TODO: добавить пагинацию
+
   @ApiOperation({ summary: 'Get all authors' })
   @ApiResponse({ status: 200, type: [Author] })
   @Get()
-  async getAllAuthors() {
-    return await this.authorService.getAllAuthors();
+  async getAllAuthors(paginationDto: PaginationDto) {
+    return await this.authorService.getAllAuthors(paginationDto);
   }
 
   @ApiOperation({ summary: 'Get author by Id' })

@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { Author } from './author.model';
 import { AuthorCreateDto } from './dto/author.create.dto';
+import { PaginationDto } from 'src/pagination';
 
 @Injectable()
 export class AuthorsService {
@@ -19,9 +20,13 @@ export class AuthorsService {
     return newAuthor;
   }
 
-  async getAllAuthors() {
+  async getAllAuthors(paginationDto: PaginationDto) {
+    const { page, limit } = paginationDto;
+    const offset = (page - 1) * limit;
     const authors = await this.authorRepository.findAll({
       include: { all: true },
+      offset,
+      limit,
     });
     return authors;
   }

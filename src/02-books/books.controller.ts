@@ -17,6 +17,7 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { Book } from './book.model';
 import { BookCreateDto } from './dto/book.create.dto';
+import { PaginationDto } from 'src/pagination';
 
 @ApiTags('books')
 @Controller('books')
@@ -31,12 +32,12 @@ export class BooksController {
     const newBook = await this.booksService.createBook(bookDto);
     return newBook;
   }
-  //TODO: добавить пагинацию
+
   @ApiOperation({ summary: 'Get all books' })
   @ApiResponse({ status: 200, type: [Book] })
   @Get()
-  async getAllBooks() {
-    return await this.booksService.getAllBooks();
+  async getAllBooks(@Query() paginationDto: PaginationDto) {
+    return await this.booksService.getAllBooks(paginationDto);
   }
 
   @ApiOperation({ summary: 'Get book by Id' })

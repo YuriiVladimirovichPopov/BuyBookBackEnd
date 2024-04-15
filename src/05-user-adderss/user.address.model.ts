@@ -7,7 +7,7 @@ import {
   BelongsTo,
   ForeignKey,
 } from 'sequelize-typescript';
-import { User } from './user.model';
+import { User } from '../04-users/user.model';
 
 @Table({ tableName: `user_address` })
 export class UserAddress extends Model<UserAddress> {
@@ -43,10 +43,10 @@ export class UserAddress extends Model<UserAddress> {
 
   @ApiProperty({ example: '666', description: `building's number` })
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.STRING,
     allowNull: false,
   })
-  building: number;
+  building: string;
 
   @ApiProperty({ example: '777', description: `apartment's number` })
   @Column({

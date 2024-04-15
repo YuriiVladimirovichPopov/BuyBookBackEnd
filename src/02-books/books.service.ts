@@ -3,6 +3,7 @@ import { Book } from './book.model';
 import { BookCreateDto } from './dto/book.create.dto';
 import { Author } from 'src/01-authors/author.model';
 import { Order } from 'src/03-orders/order.model';
+import { PaginationDto } from 'src/pagination';
 
 @Injectable()
 export class BooksService {
@@ -20,8 +21,14 @@ export class BooksService {
     return newBook;
   }
 
-  async getAllBooks() {
-    const books = await this.bookRepository.findAll({ include: { all: true } });
+  async getAllBooks(paginationDto: PaginationDto): Promise<Book[]> {
+    const { page, limit } = paginationDto;
+    const offset = (page - 1) * limit;
+    const books = await this.bookRepository.findAll({
+      include: { all: true },
+      offset,
+      limit,
+    });
     return books;
   }
 

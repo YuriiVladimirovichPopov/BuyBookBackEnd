@@ -1,5 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsPhoneNumber, IsString, Length } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsPhoneNumber,
+  IsString,
+  Length,
+} from 'class-validator';
 import { IsUniqueLogin } from 'src/validations/valid.userLogin';
 
 export class UserCreateDto {
@@ -22,4 +28,8 @@ export class UserCreateDto {
     message: `the user's phone number must be min 11 and max 12 characters`,
   })
   phoneNumber: number;
+
+  @ApiProperty({ example: '1', description: `user's identifier` })
+  @IsNumber()
+  userAddressId: number;
 }
