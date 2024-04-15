@@ -14,7 +14,7 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { User } from './user.model';
 import { BanUserDto } from './dto/ban.user.dto';
 import { UserCreateDto } from './dto/user.create.dto';
-import { UserAddress } from '../05-user-adderss/user.address.model';
+import { UserAddress } from '../05-user-address/user.address.model';
 import { PaginationDto } from 'src/pagination';
 
 @ApiTags('users')

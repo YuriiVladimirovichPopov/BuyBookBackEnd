@@ -26,7 +26,7 @@ export class createAddressByUserDto {
   })
   street: string;
 
-  @ApiProperty({ example: 'Vasilii', description: `user's building` })
+  @ApiProperty({ example: '34', description: `user's building` })
   @IsString()
   @IsNotEmpty()
   @Length(1, 10, {

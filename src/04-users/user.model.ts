@@ -8,7 +8,7 @@ import {
   HasOne,
 } from 'sequelize-typescript';
 import { Order } from 'src/03-orders/order.model';
-import { UserAddress } from '../05-user-adderss/user.address.model';
+import { UserAddress } from '../05-user-address/user.address.model';
 
 @Table({ tableName: 'users' })
 export class User extends Model<User> {

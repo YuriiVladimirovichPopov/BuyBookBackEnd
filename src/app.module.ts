@@ -17,9 +17,9 @@ import { booksProviders } from './02-books/book.providers';
 import { authorsProviders } from './01-authors/author.providers';
 import { ordersProviders } from './03-orders/order.providers';
 import { ConfigModule } from '@nestjs/config';
-import { UserAdderssModule } from './05-user-adderss/user-adderss.module';
-import { UserAdderssService } from './05-user-adderss/user-adderss.service';
-import { userAddressProviders } from './05-user-adderss/user.providers';
+import { UserAdderssModule } from './05-user-address/user-adderss.module';
+import { userAddressProviders } from './05-user-address/user.address.providers';
+import { UserAddressService } from './05-user-address/user-adderss.service';
 
 @Module({
   imports: [
@@ -46,7 +46,7 @@ import { userAddressProviders } from './05-user-adderss/user.providers';
     BooksService,
     AuthorsService,
     OrdersService,
-    UserAdderssService,
+    UserAddressService,
     //providers
     ...usersProviders,
     ...booksProviders,

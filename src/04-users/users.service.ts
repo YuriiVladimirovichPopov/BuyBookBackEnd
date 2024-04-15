@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { User } from './user.model';
 import { UserCreateDto } from './dto/user.create.dto';
 import { BanUserDto } from './dto/ban.user.dto';
-import { createAddressByUserDto } from '../05-user-adderss/dto/addressByUser.create.dto';
+import { createAddressByUserDto } from '../05-user-address/dto/addressByUser.create.dto';
 import { PaginationDto } from 'src/pagination';
 
 @Injectable()
@@ -24,7 +24,18 @@ export class UsersService {
 
   async getUsers(paginationDto: PaginationDto): Promise<User[]> {
     const { page, limit } = paginationDto;
+
+    // Проверка корректности типов и значений
+    if (
+      typeof page !== 'number' ||
+      typeof limit !== 'number' ||
+      page <= 0 ||
+      limit <= 0
+    ) {
+      throw new Error('Invalid pagination parameters');
+    }
     const offset = (page - 1) * limit;
+
     const users = await this.userRepository.findAll({
       include: { all: true },
       offset,
