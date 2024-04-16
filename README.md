@@ -1,6 +1,6 @@
 # BuyBookBackEnd
 RestAPI buy book project backEnd for UES
-Созданы 5 сущностей:
+- Созданы 5 сущностей:
 - авторы
 - книги
 - заказы
