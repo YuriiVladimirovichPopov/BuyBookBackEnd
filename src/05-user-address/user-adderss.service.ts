@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { UserAddress } from './user.address.model';
+import { UserAddress } from './model/user.address.model';
 import { createAddressByUserDto } from './dto/addressByUser.create.dto';
 
 @Injectable()
@@ -33,5 +33,22 @@ export class UserAddressService {
       );
     }
     return address;
+  }
+
+  async updateUserAddress(id: number, address: createAddressByUserDto) {
+    const userAddress = await this.userAddressRepository.findByPk(id);
+    if (!userAddress) {
+      throw new HttpException(
+        `address with id ${id} not found`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    userAddress.country = address.country;
+    userAddress.city = address.city;
+    userAddress.street = address.street;
+    userAddress.building = address.building;
+    userAddress.apartment = address.apartment;
+    await userAddress.save();
+    return userAddress;
   }
 }

@@ -6,7 +6,7 @@ import {
   IsNotEmpty,
   IsEnum,
 } from 'class-validator';
-import { OrderStatus } from '../order.model';
+import { OrderStatus } from '../model/order.model';
 
 export class OrderCreateDto {
   @ApiProperty({ example: '1', description: 'unique identifier' })

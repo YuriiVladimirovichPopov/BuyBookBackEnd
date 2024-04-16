@@ -10,7 +10,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { OrdersService } from './orders.service';
-import { Order } from './order.model';
+import { Order } from './model/order.model';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { OrderCreateDto } from './dto/create.order.dto';
 

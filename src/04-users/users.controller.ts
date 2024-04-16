@@ -11,10 +11,10 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { User } from './user.model';
+import { User } from './model/user.model';
 import { BanUserDto } from './dto/ban.user.dto';
 import { UserCreateDto } from './dto/user.create.dto';
-import { UserAddress } from '../05-user-address/user.address.model';
+import { UserAddress } from '../05-user-address/model/user.address.model';
 import { PaginationDto } from 'src/pagination';
 
 @ApiTags('users')

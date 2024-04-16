@@ -10,13 +10,13 @@ export class createAddressByUserDto {
   })
   country: string;
 
-  @ApiProperty({ example: 'BiggaGrad', description: `user's sity` })
+  @ApiProperty({ example: 'BiggaGrad', description: `user's city` })
   @IsString()
   @IsNotEmpty()
   @Length(1, 87, {
     message: `the user's sity must be min 1 and max 87 characters`,
   })
-  sity: string;
+  city: string;
 
   @ApiProperty({ example: 'Progerov', description: `user's street` })
   @IsString()

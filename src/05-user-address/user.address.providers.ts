@@ -1,4 +1,4 @@
-import { UserAddress } from 'src/05-user-address/user.address.model';
+import { UserAddress } from 'src/05-user-address/model/user.address.model';
 
 export const userAddressProviders = [
   {

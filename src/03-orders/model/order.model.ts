@@ -8,8 +8,8 @@ import {
   BelongsTo,
   BelongsToMany,
 } from 'sequelize-typescript';
-import { Book } from 'src/02-books/book.model';
-import { User } from 'src/04-users/user.model';
+import { Book } from 'src/02-books/model/book.model';
+import { User } from 'src/04-users/model/user.model';
 import { OrderBooks } from './order.books.model';
 
 export enum OrderStatus {

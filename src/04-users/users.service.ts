@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { User } from './user.model';
+import { User } from './model/user.model';
 import { UserCreateDto } from './dto/user.create.dto';
 import { BanUserDto } from './dto/ban.user.dto';
 import { createAddressByUserDto } from '../05-user-address/dto/addressByUser.create.dto';

@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { Order } from './order.model';
+import { Order } from './model/order.model';
 import { OrderCreateDto } from './dto/create.order.dto';
 import { UsersService } from 'src/04-users/users.service';
 

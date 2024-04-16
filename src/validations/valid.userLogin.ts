@@ -4,7 +4,7 @@ import {
   ValidatorConstraint,
   ValidatorConstraintInterface,
 } from 'class-validator';
-import { User } from 'src/04-users/user.model';
+import { User } from 'src/04-users/model/user.model';
 
 @ValidatorConstraint({ async: true })
 export class IsUniqueLoginConstraint implements ValidatorConstraintInterface {

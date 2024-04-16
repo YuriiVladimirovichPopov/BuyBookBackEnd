@@ -9,7 +9,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { AuthorsService } from './authors.service';
-import { Author } from './author.model';
+import { Author } from './model/author.model';
 import { AuthorCreateDto } from './dto/author.create.dto';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { PaginationDto } from 'src/pagination';

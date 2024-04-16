@@ -1,8 +1,8 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { Book } from './book.model';
+import { Book } from './model/book.model';
 import { BookCreateDto } from './dto/book.create.dto';
-import { Author } from 'src/01-authors/author.model';
-import { Order } from 'src/03-orders/order.model';
+import { Author } from 'src/01-authors/model/author.model';
+import { Order } from 'src/03-orders/model/order.model';
 import { PaginationDto } from 'src/pagination';
 
 @Injectable()
@@ -108,7 +108,10 @@ export class BooksService {
   async updateBookPrice(id: number, price: number) {
     const book = await this.bookRepository.findByPk(id);
     if (!book) {
-      throw new Error(`Book with id ${id} not found`);
+      throw new HttpException(
+        `Book with id ${id} not found`,
+        HttpStatus.NOT_FOUND,
+      );
     }
 
     book.price = price;

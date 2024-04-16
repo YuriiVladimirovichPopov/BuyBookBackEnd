@@ -7,10 +7,10 @@ import {
   BelongsToMany,
   ForeignKey,
 } from 'sequelize-typescript';
-import { Author } from 'src/01-authors/author.model';
+import { Author } from 'src/01-authors/model/author.model';
 import { AuthorBooks } from './books.author.model';
-import { Order } from 'src/03-orders/order.model';
-import { OrderBooks } from 'src/03-orders/order.books.model';
+import { Order } from 'src/03-orders/model/order.model';
+import { OrderBooks } from 'src/03-orders/model/order.books.model';
 
 interface BookCreationAttr {
   title: string;

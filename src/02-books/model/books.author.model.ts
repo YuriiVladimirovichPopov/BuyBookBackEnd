@@ -6,7 +6,7 @@ import {
   Table,
 } from 'sequelize-typescript';
 import { Book } from './book.model';
-import { Author } from 'src/01-authors/author.model';
+import { Author } from 'src/01-authors/model/author.model';
 
 @Table({ tableName: 'author_books', createdAt: false, updatedAt: false })
 export class AuthorBooks extends Model<AuthorBooks> {

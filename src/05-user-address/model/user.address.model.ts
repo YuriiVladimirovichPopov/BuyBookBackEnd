@@ -7,7 +7,7 @@ import {
   BelongsTo,
   ForeignKey,
 } from 'sequelize-typescript';
-import { User } from '../04-users/user.model';
+import { User } from '../../04-users/model/user.model';
 
 @Table({ tableName: `user_address` })
 export class UserAddress extends Model<UserAddress> {
@@ -27,12 +27,12 @@ export class UserAddress extends Model<UserAddress> {
   })
   country: string;
 
-  @ApiProperty({ example: `PopaLend`, description: `sity` })
+  @ApiProperty({ example: `PopaLend`, description: `city` })
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
-  sity: string;
+  city: string;
 
   @ApiProperty({ example: `Mashinkina`, description: `street` })
   @Column({

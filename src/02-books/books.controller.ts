@@ -15,7 +15,7 @@ import {
 import { BooksService } from './books.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-import { Book } from './book.model';
+import { Book } from './model/book.model';
 import { BookCreateDto } from './dto/book.create.dto';
 import { PaginationDto } from 'src/pagination';
 
