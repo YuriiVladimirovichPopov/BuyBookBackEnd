@@ -28,7 +28,7 @@ export class UserAddressController {
     return newUser;
   }
 
-  @ApiOperation({ summary: 'Update user address by Id' })
+  @ApiOperation({ summary: 'Get user address by Id' })
   @ApiResponse({ status: 200, type: [UserAddress] })
   @Get(':id')
   getById(@Param() id: number) {
@@ -37,6 +37,7 @@ export class UserAddressController {
 
   @ApiOperation({ summary: 'Update user address' })
   @ApiResponse({ status: 204, type: [UserAddress] })
+  @UsePipes(ValidationPipe)
   @Put()
   updateAddress(
     @Param(':id') id: number,

@@ -23,6 +23,16 @@ export class BooksService {
 
   async getAllBooks(paginationDto: PaginationDto): Promise<Book[]> {
     const { page, limit } = paginationDto;
+
+    if (
+      typeof page !== 'number' ||
+      typeof limit !== 'number' ||
+      page <= 0 ||
+      limit <= 0
+    ) {
+      throw new Error('Invalid pagination parameters');
+    }
+
     const offset = (page - 1) * limit;
     const books = await this.bookRepository.findAll({
       include: { all: true },

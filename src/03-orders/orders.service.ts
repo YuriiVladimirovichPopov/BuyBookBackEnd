@@ -2,6 +2,7 @@ import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { Order } from './model/order.model';
 import { OrderCreateDto } from './dto/create.order.dto';
 import { UsersService } from 'src/04-users/users.service';
+import { PaginationDto } from 'src/pagination';
 
 @Injectable()
 export class OrdersService {
@@ -19,6 +20,27 @@ export class OrdersService {
       );
     }
     return newOrder;
+  }
+
+  async getAllOrders(paginationDto: PaginationDto): Promise<Order[]> {
+    const { page, limit } = paginationDto;
+
+    if (
+      typeof page !== 'number' ||
+      typeof limit !== 'number' ||
+      page <= 0 ||
+      limit <= 0
+    ) {
+      throw new Error('Invalid pagination parameters');
+    }
+    const offset = (page - 1) * limit;
+
+    const orders = await this.ordersRepository.findAll({
+      include: { all: true },
+      offset,
+      limit,
+    });
+    return orders;
   }
 
   async getOrderById(id: number) {

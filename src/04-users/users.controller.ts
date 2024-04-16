@@ -14,7 +14,7 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { User } from './model/user.model';
 import { BanUserDto } from './dto/ban.user.dto';
 import { UserCreateDto } from './dto/user.create.dto';
-import { UserAddress } from '../05-user-address/model/user.address.model';
+//import { UserAddress } from '../05-user-address/model/user.address.model';
 import { PaginationDto } from 'src/pagination';
 
 @ApiTags('users')
@@ -45,12 +45,12 @@ export class UsersController {
     return this.userService.getUserById(id);
   }
 
-  @ApiOperation({ summary: 'Create user address' })
-  @ApiResponse({ status: 201, type: [UserAddress] })
-  @Post()
-  addUserAddress(@Body() addressDto: UserAddress) {
-    return this.userService.createAddressByUser(addressDto);
-  }
+  // @ApiOperation({ summary: 'Create user address' })
+  // @ApiResponse({ status: 201, type: [UserAddress] })
+  // @Post()
+  // addUserAddress(@Body() addressDto: UserAddress) {
+  //   return this.userService.createAddressByUser(addressDto);
+  // }
 
   @ApiOperation({ summary: `Ban users` })
   @ApiResponse({ status: 200 })

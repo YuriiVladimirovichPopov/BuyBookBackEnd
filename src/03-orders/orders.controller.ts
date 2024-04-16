@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -13,6 +14,7 @@ import { OrdersService } from './orders.service';
 import { Order } from './model/order.model';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { OrderCreateDto } from './dto/create.order.dto';
+import { PaginationDto } from 'src/pagination';
 
 @Controller('orders')
 export class OrdersController {
@@ -25,6 +27,13 @@ export class OrdersController {
   async create(@Body() orderDto: OrderCreateDto) {
     const newOrder = await this.orderService.createOrder(orderDto);
     return newOrder;
+  }
+
+  @ApiOperation({ summary: 'Get All Orders' })
+  @ApiResponse({ status: 200, type: [Order] })
+  @Get()
+  getAllOrders(@Query() paginationDto: PaginationDto) {
+    return this.orderService.getAllOrders(paginationDto);
   }
 
   @ApiOperation({ summary: 'Get Order by Id' })
