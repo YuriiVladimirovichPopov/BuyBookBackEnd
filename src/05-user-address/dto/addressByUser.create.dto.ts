@@ -14,7 +14,7 @@ export class createAddressByUserDto {
   @IsString()
   @IsNotEmpty()
   @Length(1, 87, {
-    message: `the user's sity must be min 1 and max 87 characters`,
+    message: `the user's city must be min 1 and max 87 characters`,
   })
   city: string;
 

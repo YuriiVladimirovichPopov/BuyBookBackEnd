@@ -1,11 +1,11 @@
 import { Sequelize } from 'sequelize-typescript';
-import { Author } from 'src/01-authors/model/author.model';
 import { Book } from 'src/02-books/model/book.model';
 import { AuthorBooks } from 'src/02-books/model/books.author.model';
 import { OrderBooks } from 'src/03-orders/model/order.books.model';
 import { Order } from 'src/03-orders/model/order.model';
 import { UserAddress } from 'src/05-user-address/model/user.address.model';
 import { User } from 'src/04-users/model/user.model';
+import { Author } from 'src/01-authors/author.model';
 
 export const databaseProviders = [
   {

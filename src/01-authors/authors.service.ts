@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { Author } from './model/author.model';
 import { AuthorCreateDto } from './dto/author.create.dto';
 import { PaginationDto } from 'src/pagination';
+import { Author } from './author.model';
 
 @Injectable()
 export class AuthorsService {

@@ -44,7 +44,8 @@ export class Author extends Model<Author, AuthorCreationAttr> {
   @ApiProperty({ example: `bla bla bla`, description: `author's biography` })
   @Column({
     type: DataType.STRING,
-    defaultValue: false,
+    defaultValue: '',
+    allowNull: true,
   })
   biography: string;
 

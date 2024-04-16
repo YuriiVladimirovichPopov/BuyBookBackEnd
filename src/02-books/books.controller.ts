@@ -58,21 +58,21 @@ export class BooksController {
   @ApiResponse({ status: 200, type: [Book] })
   @Get(':price')
   async searchByPrice(@Query('price') price: number): Promise<Book> {
-    return this.booksService.searchBookByPrice(price);
+    return await this.booksService.searchBookByPrice(price);
   }
 
   @ApiOperation({ summary: 'Get book by author' })
   @ApiResponse({ status: 200, type: [Book] })
-  @Get(':author')
+  @Get(':authorId')
   async searchByAuthor(@Query('authorId') authorId: number): Promise<Book[]> {
-    return this.booksService.searchBooksByAuthor(authorId);
+    return await this.booksService.searchBooksByAuthor(authorId);
   }
 
   @ApiOperation({ summary: 'Get book by order' })
   @ApiResponse({ status: 200, type: [Book] })
   @Get(':order')
   async searchByOrder(@Query('orderId') orderId: number): Promise<Book[]> {
-    return this.booksService.searchBooksByOrder(orderId);
+    return await this.booksService.searchBooksByOrder(orderId);
   }
 
   @ApiOperation({ summary: 'Update book by price' })
@@ -82,7 +82,7 @@ export class BooksController {
     @Param('id') id: number,
     @Body('price') price: number,
   ): Promise<Book> {
-    return this.booksService.updateBookPrice(id, price);
+    return await this.booksService.updateBookPrice(id, price);
   }
 
   @ApiOperation({ summary: `Delete book by Id` })

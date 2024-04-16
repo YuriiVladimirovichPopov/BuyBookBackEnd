@@ -79,23 +79,6 @@ export class OrdersService {
       );
     }
   }
-  //TODO: переделать
-  async findOrdersByDeliveryAddress(address: string): Promise<Order[]> {
-    const orders = await this.ordersRepository.findAll({
-      where: { deliveryAddress: address },
-    });
-    if (!orders || orders.length === 0) {
-      throw new HttpException(
-        `Orders with delivery address ${address} not found`,
-        HttpStatus.NOT_FOUND,
-      );
-    }
-    return orders;
-  }
-  //Это для поиска одного заказа по адресу
-  // const order = await Order.findByPk(orderId, { include: User });
-  // const user = order.user;
-  // const address = user.userAddress;
 
   async updateOrder(id: number, updatedto: OrderCreateDto): Promise<Order> {
     const order = await this.ordersRepository.findOne({

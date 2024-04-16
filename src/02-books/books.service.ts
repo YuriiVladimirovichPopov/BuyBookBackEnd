@@ -1,9 +1,9 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { Book } from './model/book.model';
 import { BookCreateDto } from './dto/book.create.dto';
-import { Author } from 'src/01-authors/model/author.model';
 import { Order } from 'src/03-orders/model/order.model';
 import { PaginationDto } from 'src/pagination';
+import { Author } from 'src/01-authors/author.model';
 
 @Injectable()
 export class BooksService {
@@ -11,6 +11,17 @@ export class BooksService {
 
   async createBook(dto: BookCreateDto) {
     dto.publishedDate = new Date(dto.publishedDate);
+
+    const existingBook = await this.bookRepository.findOne({
+      where: { ISBN: dto.ISBN },
+    });
+    if (existingBook) {
+      throw new HttpException(
+        { message: 'Book with the same ISBN already exists' },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
     const newBook = await this.bookRepository.create(dto);
     if (!newBook.id) {
       throw new HttpException(
@@ -34,8 +45,9 @@ export class BooksService {
     }
 
     const offset = (page - 1) * limit;
+
     const books = await this.bookRepository.findAll({
-      include: { all: true },
+      include: [{ all: true }],
       offset,
       limit,
     });
@@ -77,7 +89,7 @@ export class BooksService {
     }
     return bookByPrice;
   }
-  //TODO: проверить!!!
+
   async searchBooksByAuthor(authorId: number): Promise<Book[]> {
     const booksByAuthor = await this.bookRepository.findAll({
       include: [
@@ -96,7 +108,6 @@ export class BooksService {
     return booksByAuthor;
   }
 
-  //TODO: проверить!!!
   async searchBooksByOrder(orderId: number): Promise<Book[]> {
     const booksByOrder = await this.bookRepository.findAll({
       include: [

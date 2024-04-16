@@ -5,11 +5,12 @@ import {
   Get,
   Param,
   Post,
+  Query,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { AuthorsService } from './authors.service';
-import { Author } from './model/author.model';
+import { Author } from './author.model';
 import { AuthorCreateDto } from './dto/author.create.dto';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { PaginationDto } from 'src/pagination';
@@ -31,7 +32,7 @@ export class AuthorsController {
   @ApiOperation({ summary: 'Get all authors' })
   @ApiResponse({ status: 200, type: [Author] })
   @Get()
-  async getAllAuthors(paginationDto: PaginationDto) {
+  async getAllAuthors(@Query() paginationDto: PaginationDto) {
     return await this.authorService.getAllAuthors(paginationDto);
   }
 

@@ -10,7 +10,7 @@ import { User } from 'src/04-users/model/user.model';
 export class IsUniqueLoginConstraint implements ValidatorConstraintInterface {
   async validate(login: string) {
     const user = await User.findOne({ where: { login } });
-    return !user; // Вернуть true, если пользователь с таким логином не найден
+    return !user;
   }
 }
 

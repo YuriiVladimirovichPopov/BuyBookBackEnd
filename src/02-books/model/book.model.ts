@@ -7,10 +7,10 @@ import {
   BelongsToMany,
   ForeignKey,
 } from 'sequelize-typescript';
-import { Author } from 'src/01-authors/model/author.model';
 import { AuthorBooks } from './books.author.model';
 import { Order } from 'src/03-orders/model/order.model';
 import { OrderBooks } from 'src/03-orders/model/order.books.model';
+import { Author } from 'src/01-authors/author.model';
 
 interface BookCreationAttr {
   title: string;
@@ -53,8 +53,10 @@ export class Book extends Model<Book, BookCreationAttr> {
   })
   publishedDate: Date;
 
-  // eslint-disable-next-line prettier/prettier
-  @ApiProperty({ example: 'ISBN 978-5-93673-265-2', description: `book's ISBN` })
+  @ApiProperty({
+    example: 'ISBN 978-5-93673-265-2',
+    description: `book's ISBN`,
+  })
   @Column({
     type: DataType.STRING,
     unique: true,
@@ -68,10 +70,6 @@ export class Book extends Model<Book, BookCreationAttr> {
     allowNull: false,
   })
   price: number;
-
-  // @ForeignKey(() => Order)
-  // @Column({ type: DataType.INTEGER })
-  // orderId: number;
 
   @ForeignKey(() => Author)
   @Column({ type: DataType.INTEGER })

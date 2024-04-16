@@ -68,13 +68,6 @@ export class OrdersController {
     return this.orderService.findOrdersByBookTitle(bookTitle);
   }
 
-  @ApiOperation({ summary: `Get Order by user's address` })
-  @ApiResponse({ status: 200, type: [Order] })
-  @Get('/address')
-  async findByDeliveryAddress(@Body() address: string) {
-    return this.orderService.findOrdersByDeliveryAddress(address);
-  }
-
   @ApiOperation({ summary: `Delete Order by Id` })
   @ApiResponse({ status: 200 })
   @Delete(':id')

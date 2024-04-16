@@ -2,10 +2,6 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsString, Length, IsNotEmpty } from 'class-validator';
 
 export class AuthorCreateDto {
-  // @ApiProperty({ example: '1', description: 'unique identifier' })
-  // @IsNumber()
-  // authorId: number;
-
   @ApiProperty({ example: 'Oleg', description: `author's first name` })
   @IsString()
   @IsNotEmpty()
@@ -21,4 +17,15 @@ export class AuthorCreateDto {
     message: `author's last name must be min 1 and max 40 characters`,
   })
   lastName: string;
+
+  @ApiProperty({
+    example: `short author's biography`,
+    description: `author's short biography`,
+  })
+  @IsString()
+  @IsNotEmpty()
+  @Length(1, 200, {
+    message: `author's short biography be min 1 and max 200 characters`,
+  })
+  biography: string;
 }
