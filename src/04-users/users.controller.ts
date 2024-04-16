@@ -40,21 +40,21 @@ export class UsersController {
   @ApiOperation({ summary: 'Get user by Id' })
   @ApiResponse({ status: 200, type: [User] })
   @Get(':id')
-  getById(@Param() id: number) {
-    return this.userService.getUserById(id);
+  async getById(@Param() id: number) {
+    return await this.userService.getUserById(id);
   }
 
   @ApiOperation({ summary: `Ban users` })
   @ApiResponse({ status: 200 })
   @Post('/ban')
-  banUsers(@Body() dto: BanUserDto) {
-    return this.userService.banUser(dto);
+  async banUsers(@Body() dto: BanUserDto) {
+    return await this.userService.banUser(dto);
   }
 
   @ApiOperation({ summary: `Delete user by Id` })
   @ApiResponse({ status: 200 })
   @Delete(':id')
-  deleteUser(@Param('id') id: number) {
-    return this.userService.deleteUserById(id);
+  async deleteUser(@Param('id') id: number) {
+    return await this.userService.deleteUserById(id);
   }
 }

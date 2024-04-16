@@ -32,15 +32,15 @@ export class OrdersController {
   @ApiOperation({ summary: 'Get All Orders' })
   @ApiResponse({ status: 200, type: [Order] })
   @Get()
-  getAllOrders(@Query() paginationDto: PaginationDto) {
-    return this.orderService.getAllOrders(paginationDto);
+  async getAllOrders(@Query() paginationDto: PaginationDto) {
+    return await this.orderService.getAllOrders(paginationDto);
   }
 
   @ApiOperation({ summary: 'Get Order by Id' })
   @ApiResponse({ status: 200, type: [Order] })
   @Get(':id')
-  getOrderById(@Param('id') orderId: number) {
-    return this.orderService.getOrderById(orderId);
+  async getOrderById(@Param('id') orderId: number) {
+    return await this.orderService.getOrderById(orderId);
   }
 
   @ApiOperation({ summary: 'Update Order by Id' })
@@ -58,20 +58,20 @@ export class OrdersController {
   @ApiResponse({ status: 200, type: [Order] })
   @Get('/user/:userId')
   async findByUserId(@Param('userId') userId: number): Promise<Order[]> {
-    return this.orderService.findOrderByUserId(userId);
+    return await this.orderService.findOrderByUserId(userId);
   }
 
   @ApiOperation({ summary: 'Get Order by book title' })
   @ApiResponse({ status: 200, type: [Order] })
   @Get('/book/:bookTitle')
   async findByBookId(@Param('bookTitle') bookTitle: string): Promise<Order[]> {
-    return this.orderService.findOrdersByBookTitle(bookTitle);
+    return await this.orderService.findOrdersByBookTitle(bookTitle);
   }
 
   @ApiOperation({ summary: `Delete Order by Id` })
   @ApiResponse({ status: 200 })
   @Delete(':id')
-  deleteOrder(@Param('id') id: number) {
-    return this.orderService.deleteOrderById(id);
+  async deleteOrder(@Param('id') id: number) {
+    return await this.orderService.deleteOrderById(id);
   }
 }

@@ -31,18 +31,18 @@ export class UserAddressController {
   @ApiOperation({ summary: 'Get user address by Id' })
   @ApiResponse({ status: 200, type: [UserAddress] })
   @Get(':id')
-  getById(@Param() id: number) {
-    return this.userAddressService.getUserAddress(id);
+  async getById(@Param() id: number) {
+    return await this.userAddressService.getUserAddress(id);
   }
 
   @ApiOperation({ summary: 'Update user address' })
   @ApiResponse({ status: 204, type: [UserAddress] })
   @UsePipes(ValidationPipe)
   @Put()
-  updateAddress(
+  async updateAddress(
     @Param(':id') id: number,
     @Body() userAddressDto: createAddressByUserDto,
   ) {
-    return this.userAddressService.updateUserAddress(id, userAddressDto);
+    return await this.userAddressService.updateUserAddress(id, userAddressDto);
   }
 }
